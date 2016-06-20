@@ -12,8 +12,21 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+// require turbolinks
 
-//= require bootstrap-sprockets
+//= require bootstrap/dist/js/bootstrap.min
+//= require datatables/media/js/jquery.dataTables.min
+//= require datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js
+
+//= require flot/excanvas.min
+//= require flot/jquery.flot
+//= require flot/jquery.flot.pie
+//= require flot/jquery.flot.resize
+//= require flot/jquery.flot.time
+//= require flot.tooltip/js/jquery.flot.tooltip.min
+//= require metisMenu/dist/metisMenu.min
+//= require startbootstrap-sb-admin-2/dist/js/sb-admin-2
+//= require morrisjs/morris.min
+//= require raphael/raphael.min
 
 //= require_tree .

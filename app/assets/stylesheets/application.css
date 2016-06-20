@@ -10,6 +10,17 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require bootstrap/dist/css/bootstrap.min
+ *= require bootstrap-social/bootstrap-social
+ *= require datatables-plugins/integration/bootstrap/3/dataTables.bootstrap
+ *= require datatables-responsive/css/responsive.dataTables.css
+ *
+ *= require startbootstrap-sb-admin-2/dist/css/sb-admin-2
+ *= require startbootstrap-sb-admin-2/dist/css/timeline
+ *= require font-awesome/css/font-awesome.min
+ *= require metisMenu/dist/metisMenu.min
+ *= require morrisjs/morris
+ *
  *= require_tree .
  *= require_self
  */
