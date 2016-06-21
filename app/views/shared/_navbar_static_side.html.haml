@@ -18,9 +18,19 @@
           %span.fa.arrow
         %ul.nav.nav-second-level
           %li
-            %a{ href: '/costs' } Costs list
+            %a{ href: costs_path } Costs list
           %li
-            %a{ href: '/costs/new' } Add new cost
+            %a{ href: new_cost_path } Add new cost
+      %li
+        %a{ href: '#' }
+          %i.fa.fa-money.fa-fw
+          | Cost categories
+          %span.fa.arrow
+        %ul.nav.nav-second-level
+          %li
+            %a{ href: cost_categories_path } Cost categories list
+          %li
+            %a{ href: new_cost_category_path } Add new cost category
       %li
         %a{ href: '/dashboard/sample' }
           %i.fa.fa-camera.fa-fw

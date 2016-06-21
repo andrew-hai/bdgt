@@ -1,16 +1,12 @@
 = simple_form_for @cost do |f|
-  - if @cost.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@cost.errors.count, "error")} prohibited this cost from being saved:"
-      %ul
-        - @cost.errors.full_messages.each do |msg|
-          %li= msg
+  = f.error_notification
   .row
     .col-lg-6
       %fieldset
-        = f.input :name, input_html: { class:'form-control', placeholder: 'Cost title' }
-        = f.input :amount, input_html: { class:'form-control', placeholder: 'Cost amount' }
-        = f.input :description, input_html: { class:'form-control', placeholder: 'Cost description' }
-        = f.input :spent_on, input_html: { class:'form-control', placeholder: 'Cost spent on' }
+        = f.input :name, input_html: { class: 'form-control', placeholder: 'Cost title' }
+        = f.input :cost_category_id, collection: @categories, prompt: 'Select cost category', input_html: { class: 'form-control' }
+        = f.input :amount, input_html: { class: 'form-control', placeholder: 'Cost amount' }
+        = f.input :description, input_html: { class: 'form-control', placeholder: 'Cost description' }
+        = f.input :spent_on, input_html: { class: 'form-control', placeholder: 'Cost spent on' }
       .actions
         = f.submit 'Save', class: 'btn btn-success'

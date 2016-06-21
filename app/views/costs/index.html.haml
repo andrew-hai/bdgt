@@ -1,34 +1,35 @@
-#page-wrapper
-  .row
-    .col-lg-12
-      %h1.page-header Costs
-  .row
-    .col-lg-12
-      .panel.panel-default
-        .panel-heading  Context Classes
-        .panel-body
-          .table-responsive
-            %table.table
-              %thead
+.row
+  .col-lg-12
+    %h1.page-header Costs
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading  Costs list
+      .panel-body
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th Name
+                %th Category
+                %th Amount
+                %th Description
+                %th Spent on
+                %th User
+                %th Actions
+            %tbody
+              - @costs.each do |cost|
                 %tr
-                  %th Name
-                  %th Amount
-                  %th Description
-                  %th Spent on
-                  %th User
-                  %th Actions
-              %tbody
-                - @costs.each do |cost|
-                  %tr
-                    %td= cost.name
-                    %td= cost.amount
-                    %td= cost.description
-                    %td= cost.spent_on
-                    %td= cost.user.try(:username)
-                    %td
-                      = link_to 'Edit', edit_cost_path(cost)
-                      = link_to 'Destroy', cost, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                  %td= cost.name
+                  %td= cost.cost_category.name
+                  %td= cost.amount
+                  %td= cost.description
+                  %td= cost.spent_on
+                  %td= cost.user.try(:username)
+                  %td
+                    = link_to 'Edit', edit_cost_path(cost)
+                    = link_to 'Destroy', cost, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-    %br
+  %br
 
-    = link_to 'New Cost', new_cost_path, class: 'btn btn-success'
+  = link_to 'New Cost', new_cost_path, class: 'btn btn-success'

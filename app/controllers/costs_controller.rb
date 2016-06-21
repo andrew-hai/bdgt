@@ -1,5 +1,6 @@
 class CostsController < ApplicationController
   before_action :set_cost, only: [:show, :edit, :update, :destroy]
+  before_action :set_cost_categories, only: [:new, :create, :edit, :update]
 
   # GET /costs
   # GET /costs.json
@@ -67,8 +68,18 @@ class CostsController < ApplicationController
       @cost = Cost.find(params[:id])
     end
 
+    def set_cost_categories
+      @categories = CostCategory.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def cost_params
-      params.require(:cost).permit(:name, :amount, :description, :spent_on)
+      params.require(:cost).permit(
+        :cost_category_id,
+        :name,
+        :amount,
+        :description,
+        :spent_on
+      )
     end
 end
