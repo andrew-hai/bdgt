@@ -1,7 +1,6 @@
 .row
   .col-lg-12
-    %h1.page-header New Cost
+    %h2.page-header= t(:new_cost)
 .row
-  = render 'form'
-
-  = link_to 'Back', costs_path
+  .col-lg-12
+    = render 'form'

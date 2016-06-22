@@ -1,75 +1,17 @@
 .row
+  .col-lg-6
+    %h2.page-header= t(:dashboard)
+
+.row.visible-xs-block.form-group
   .col-lg-12
-    %h1.page-header Dashboard
-.row
-  .col-lg-3.col-md-6
-    .panel.panel-primary
-      .panel-heading
-        .row
-          .col-xs-3
-            %i.fa.fa-comments.fa-5x
-          .col-xs-9.text-right
-            .huge 26
-            %div New Comments!
-      %a{ href: "#" }
-        .panel-footer
-          %span.pull-left View Details
-          %span.pull-right
-            %i.fa.fa-arrow-circle-right
-          .clearfix
-
-  .col-lg-3.col-md-6
-    .panel.panel-green
-      .panel-heading
-        .row
-          .col-xs-3
-            %i.fa.fa-tasks.fa-5x
-          .col-xs-9.text-right
-            .huge 12
-            %div New Tasks!
-      %a{ href: "#" }
-        .panel-footer
-          %span.pull-left View Details
-          %span.pull-right
-            %i.fa.fa-arrow-circle-right
-          .clearfix
-
-  .col-lg-3.col-md-6
-    .panel.panel-yellow
-      .panel-heading
-        .row
-          .col-xs-3
-            %i.fa.fa-shopping-cart.fa-5x
-          .col-xs-9.text-right
-            .huge 123
-            %div New Orders!
-      %a{ href: "#" }
-        .panel-footer
-          %span.pull-left View Details
-          %span.pull-right
-            %i.fa.fa-arrow-circle-right
-          .clearfix
-
-  .col-lg-3.col-md-6
-    .panel.panel-red
-      .panel-heading
-        .row
-          .col-xs-3
-            %i.fa.fa-support.fa-5x
-          .col-xs-9.text-right
-            .huge 9
-            %div Support Tickets!
-      %a{ href: "#" }
-        .panel-footer
-          %span.pull-left View Details
-          %span.pull-right
-            %i.fa.fa-arrow-circle-right
-          .clearfix
+    = link_to new_cost_path, class: 'btn btn-success btn-lg btn-block' do
+      %i.fa.fa-plus
+      = t(:add_new_cost)
 
 .row
   .col-lg-12
     .panel.panel-default
-      .panel-heading  Costs list
+      .panel-heading= t(:costs_list)
       .panel-body
         .table-responsive
           %table.table

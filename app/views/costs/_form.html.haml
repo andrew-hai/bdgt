@@ -1,12 +1,12 @@
-= simple_form_for @cost do |f|
-  = f.error_notification
+= simple_form_for @cost, defaults: { input_html: { :class => 'form-control' } } do |f|
   .row
     .col-lg-6
+      = f.error_notification
       %fieldset
-        = f.input :name, input_html: { class: 'form-control', placeholder: 'Cost title' }
-        = f.input :cost_category_id, collection: @categories, prompt: 'Select cost category', input_html: { class: 'form-control' }
-        = f.input :amount, input_html: { class: 'form-control', placeholder: 'Cost amount' }
-        = f.input :description, input_html: { class: 'form-control', placeholder: 'Cost description' }
-        = f.input :spent_on, input_html: { class: 'form-control', placeholder: 'Cost spent on' }
+        = f.input :name
+        = f.input :cost_category_id, collection: @categories, prompt: :translate
+        = f.input :amount
+        = f.input :description
+        = f.input :spent_on
       .actions
-        = f.submit 'Save', class: 'btn btn-success'
+        = f.submit t(:save), class: 'btn btn-success'

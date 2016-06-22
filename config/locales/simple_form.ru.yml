@@ -1,15 +1,15 @@
 en:
   simple_form:
-    "yes": 'Yes'
-    "no": 'No'
+    "yes": 'Да'
+    "no": 'Нет'
     required:
-      text: 'required'
+      text: 'обязательное'
       mark: '*'
       # You can uncomment the line below if you need to overwrite the whole required html.
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     error_notification:
-      default_message: "Please review the problems below:"
+      default_message: "Пожалуйста просмотрите проблемы ниже:"
     # Examples
     # labels:
     #   defaults:
@@ -21,16 +21,16 @@ en:
     #       email: 'E-mail.'
     labels:
       cost:
-        name: 'Name'
-        cost_category_id: 'Cost category'
-        amount: 'Amount'
-        description: 'Description'
-        spent_on: 'Spent on'
+        name: 'Название'
+        cost_category_id: 'Категория'
+        amount: 'Сумма'
+        description: 'Описание'
+        spent_on: 'Потрачено'
     placeholders:
       cost:
-        name: 'Cost name'
-        amount: 'Cost amount'
-        description: 'Cost description'
+        name: 'Введите название расхода'
+        amount: 'Введите сумму расхода'
+        description: 'Введите описание расхода'
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'
@@ -43,4 +43,4 @@ en:
     #     age: 'Select your age'
     prompts:
       cost:
-        cost_category_id: 'Select cost category'
+        cost_category_id: 'Выберите категорию расхода'

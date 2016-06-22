@@ -41,9 +41,16 @@ set :unicorn_pid, "#{deploy_to}/shared/unicorn.pid"
 
 after 'deploy', 'deploy:migrate'
 
+after 'deploy:publishing', 'deploy:fonts'
 after 'deploy:publishing', 'deploy:restart'
 
 namespace :deploy do
+  task :fonts do
+    on roles(:app) do
+      execute "ln -s #{release_path}/vendor/assets/bower_components/font-awesome/fonts #{release_path}/public/fonts"
+    end
+  end
+
   task :restart do
     invoke 'unicorn:restart'
   end

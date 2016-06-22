@@ -8,11 +8,6 @@ class CostsController < ApplicationController
     @costs = Cost.includes(:user).all
   end
 
-  # GET /costs/1
-  # GET /costs/1.json
-  # def show
-  # end
-
   # GET /costs/new
   def new
     @cost = Cost.new

@@ -1,6 +1,6 @@
 .row
   .col-lg-12
-    %h1.page-header Cost categories
+    %h2.page-header Cost categories
 .row
   .col-lg-12
     .panel.panel-default
@@ -21,7 +21,4 @@
                   %td
                     = link_to 'Edit', edit_cost_category_path(cost_category)
                     = link_to 'Destroy', cost_category, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-  %br
-
-  = link_to 'New Cost category', new_cost_category_path, class: 'btn btn-success'
+    = link_to 'New Cost Category', new_cost_category_path, class: 'btn btn-success'

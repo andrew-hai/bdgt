@@ -14,13 +14,13 @@
       %li
         %a{ href: '#' }
           %i.fa.fa-money.fa-fw
-          | Costs
+          = t(:costs)
           %span.fa.arrow
         %ul.nav.nav-second-level
           %li
-            %a{ href: costs_path } Costs list
+            = link_to t(:costs_list), costs_path
           %li
-            %a{ href: new_cost_path } Add new cost
+            = link_to t(:add_new_cost), new_cost_path
       %li
         %a{ href: '#' }
           %i.fa.fa-money.fa-fw

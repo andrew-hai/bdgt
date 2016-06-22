@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :cost_categories
-  resources :costs
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -61,6 +59,9 @@ Rails.application.routes.draw do
   resource :dashboard, only: [] do
     get :sample
   end
+
+  resources :cost_categories, except: :show
+  resources :costs, except: :show
 
   devise_for :users
 end

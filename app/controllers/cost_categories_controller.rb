@@ -7,11 +7,6 @@ class CostCategoriesController < ApplicationController
     @cost_categories = CostCategory.all
   end
 
-  # GET /cost_categories/1
-  # GET /cost_categories/1.json
-  def show
-  end
-
   # GET /cost_categories/new
   def new
     @cost_category = CostCategory.new

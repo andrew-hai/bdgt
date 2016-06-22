@@ -19,12 +19,12 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  add_new_cost: 'Add new cost'
-  cost: 'Cost'
-  costs: 'Costs'
-  costs_list: 'Costs list'
-  new_cost: 'New Cost'
-  edit_cost: 'Edit cost'
-  dashboard: 'Dashboard'
-  save: 'Save'
+ru:
+  add_new_cost: 'Добавить новый расход'
+  cost: 'Расход'
+  costs: 'Расходы'
+  costs_list: 'Список расходов'
+  new_cost: 'Новый расход'
+  edit_cost: 'Редактировать расход'
+  dashboard: 'Главная панель'
+  save: 'Сохранить'
