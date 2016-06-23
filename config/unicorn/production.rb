@@ -17,11 +17,11 @@ preload_app true
 working_directory app_path
 
 # Should be 'production' by default, otherwise use other env 
-rails_env = 'production'
+rails_env 'production'
 
 # Log everything to one file
-stderr_path 'log/unicorn.log'
-stdout_path 'log/unicorn.log'
+stderr_path '../../log/unicorn.log'
+stdout_path '../../log/unicorn.log'
 
 # Set master PID location
 pid "#{deploy_to}/shared/unicorn.pid"
