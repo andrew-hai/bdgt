@@ -26,11 +26,17 @@ en:
         amount: 'Amount'
         description: 'Description'
         spent_on: 'Spent on'
+      cost_category:
+        name: 'Name'
+        description: 'Description'
     placeholders:
       cost:
         name: 'Cost name'
         amount: 'Cost amount'
         description: 'Cost description'
+      cost_category:
+        name: 'Cost category name'
+        description: 'Cost categort description'
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'

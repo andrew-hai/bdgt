@@ -26,11 +26,17 @@ ru:
         amount: 'Сумма'
         description: 'Описание'
         spent_on: 'Потрачено'
+      cost_category:
+        name: 'Название'
+        description: 'Описание'
     placeholders:
       cost:
         name: 'Введите название расхода'
         amount: 'Введите сумму расхода'
         description: 'Введите описание расхода'
+      cost_category:
+        name: 'Введите название категории расходов'
+        description: 'Введите описание категории расходов'
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'

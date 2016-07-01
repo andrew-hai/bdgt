@@ -10,7 +10,7 @@
       %li
         %a{ href: '/' }
           %i.fa.fa-dashboard.fa-fw
-          | Dashboard
+          = t(:dashboard)
       %li
         %a{ href: '#' }
           %i.fa.fa-money.fa-fw
@@ -23,14 +23,14 @@
             = link_to t(:add_new_cost), new_cost_path
       %li
         %a{ href: '#' }
-          %i.fa.fa-money.fa-fw
-          | Cost categories
+          %i.fa.fa-th-list.fa-fw
+          = t(:cost_categories)
           %span.fa.arrow
         %ul.nav.nav-second-level
           %li
-            %a{ href: cost_categories_path } Cost categories list
+            = link_to t(:cost_categories_list), cost_categories_path
           %li
-            %a{ href: new_cost_category_path } Add new cost category
+            = link_to t(:add_new_cost_category), new_cost_category_path
       %li
         %a{ href: '/dashboard/sample' }
           %i.fa.fa-camera.fa-fw

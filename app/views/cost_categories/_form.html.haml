@@ -1,9 +1,9 @@
-= simple_form_for(@cost_category) do |f|
+= simple_form_for @cost_category, defaults: { input_html: { :class => 'form-control' } } do |f|
   .row
     .col-lg-6
       = f.error_notification
       %fieldset
-        = f.input :name, input_html: { class: 'form-control', placeholder: 'Cost category title' }
-        = f.input :description, input_html: { class: 'form-control', placeholder: 'Cost category description' }
+        = f.input :name
+        = f.input :description
       .actions
-        = f.submit 'Save', class: 'btn btn-success'
+        = f.submit t(:save), class: 'btn btn-success'

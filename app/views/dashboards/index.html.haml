@@ -17,12 +17,12 @@
           %table.table
             %thead
               %tr
-                %th Name
-                %th Category
-                %th Amount
-                %th Description
-                %th Spent on
-                %th User
+                %th= t(:name)
+                %th= t(:category)
+                %th= t(:amount)
+                %th= t(:description)
+                %th= t(:spent_on)
+                %th= t(:user)
             %tbody
               - @costs.each do |cost|
                 %tr

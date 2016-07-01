@@ -10,13 +10,13 @@
           %table.table
             %thead
               %tr
-                %th Name
-                %th Category
-                %th Amount
-                %th Description
-                %th Spent on
-                %th User
-                %th Actions
+                %th= t(:name)
+                %th= t(:category)
+                %th= t(:amount)
+                %th= t(:description)
+                %th= t(:spent_on)
+                %th= t(:user)
+                %th= t(:actions)
             %tbody
               - @costs.each do |cost|
                 %tr
@@ -27,8 +27,8 @@
                   %td= cost.spent_on
                   %td= cost.user.try(:username)
                   %td
-                    = link_to 'Edit', edit_cost_path(cost)
-                    = link_to 'Destroy', cost, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                    = link_to t(:edit), edit_cost_path(cost)
+                    = link_to t(:destroy), cost, method: :delete, data: { confirm: t(:a_u_sure) }
     = link_to new_cost_path, class: 'btn btn-success' do
       %i.fa.fa-plus
       = t(:add_new_cost)
