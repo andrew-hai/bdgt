@@ -1,5 +1,5 @@
 .row
-  .col-lg-6
+  .col-lg-12
     %h2.page-header= t(:dashboard)
 
 .row.visible-xs-block.form-group
@@ -8,27 +8,8 @@
       %i.fa.fa-plus
       = t(:add_new_cost)
 
-.row
-  .col-lg-12
-    .panel.panel-default
-      .panel-heading= t(:costs_list)
-      .panel-body
-        .table-responsive
-          %table.table
-            %thead
-              %tr
-                %th= t(:name)
-                %th= t(:category)
-                %th= t(:amount)
-                %th= t(:description)
-                %th= t(:spent_on)
-                %th= t(:user)
-            %tbody
-              - @costs.each do |cost|
-                %tr
-                  %td= cost.name
-                  %td= cost.cost_category.name
-                  %td= cost.amount
-                  %td= cost.description
-                  %td= cost.spent_on
-                  %td= cost.user.try(:username)
+/ TODO first row should be boxes with info
+
+= render 'second_row_charts'
+
+= render 'costs_list'
