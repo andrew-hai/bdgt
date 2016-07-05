@@ -1,0 +1,26 @@
+.row
+  .col-lg-12
+    %h2.page-header= t(:funds)
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading= t(:funds_list)
+      .panel-body
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th= t(:name)
+                %th= t(:currency)
+                %th= t(:description)
+                %th= t(:actions)
+            %tbody
+              - @cost_categories.each do |cost_category|
+                %tr
+                  %td= cost_category.name
+                  %td= cost_category.currency
+                  %td= cost_category.description
+                  %td
+                    = link_to t(:edit), edit_cost_category_path(cost_category)
+                    = link_to t(:destroy), cost_category, method: :delete, data: { confirm: t(:a_u_sure) }
+    = link_to t(:add_new_cost_category), new_cost_category_path, class: 'btn btn-success'

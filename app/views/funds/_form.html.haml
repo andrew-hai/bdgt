@@ -1,0 +1,10 @@
+= simple_form_for @fund, defaults: { input_html: { :class => 'form-control' } } do |f|
+  .row
+    .col-lg-6
+      = f.error_notification
+      %fieldset
+        = f.input :name
+        = f.input :currency, collection: Fund::CURRENCIES, prompt: :translate
+        = f.input :description
+      .actions
+        = f.submit t(:save), class: 'btn btn-success'
