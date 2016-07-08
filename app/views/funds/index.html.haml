@@ -15,12 +15,12 @@
                 %th= t(:description)
                 %th= t(:actions)
             %tbody
-              - @cost_categories.each do |cost_category|
+              - @funds.each do |fund|
                 %tr
-                  %td= cost_category.name
-                  %td= cost_category.currency
-                  %td= cost_category.description
+                  %td= fund.name
+                  %td= fund.currency
+                  %td= fund.description
                   %td
-                    = link_to t(:edit), edit_cost_category_path(cost_category)
-                    = link_to t(:destroy), cost_category, method: :delete, data: { confirm: t(:a_u_sure) }
-    = link_to t(:add_new_cost_category), new_cost_category_path, class: 'btn btn-success'
+                    = link_to t(:edit), edit_fund_path(fund)
+                    = link_to t(:destroy), fund, method: :delete, data: { confirm: t(:a_u_sure) }
+    = link_to t(:add_new_fund), new_fund_path, class: 'btn btn-success'

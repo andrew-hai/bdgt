@@ -29,6 +29,10 @@ ru:
       cost_category:
         name: 'Название'
         description: 'Описание'
+      fund:
+        name: 'Название'
+        currency: 'Валюта'
+        description: 'Описание'
     placeholders:
       cost:
         name: 'Введите название расхода'
@@ -37,6 +41,9 @@ ru:
       cost_category:
         name: 'Введите название категории расходов'
         description: 'Введите описание категории расходов'
+      fund:
+        name: 'Введите название денежнего средства'
+        description: 'Введите описание денежнего средства'
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'
@@ -50,3 +57,5 @@ ru:
     prompts:
       cost:
         cost_category_id: 'Выберите категорию расхода'
+      fund:
+        currency: 'Выберите валюту денежнего средства'

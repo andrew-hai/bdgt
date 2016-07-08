@@ -32,6 +32,16 @@
           %li
             = link_to t(:add_new_cost_category), new_cost_category_path
       %li
+        %a{ href: '#' }
+          %i.fa.fa-credit-card.fa-fw
+          = t(:funds)
+          %span.fa.arrow
+        %ul.nav.nav-second-level
+          %li
+            = link_to t(:funds_list), funds_path
+          %li
+            = link_to t(:add_new_fund), new_fund_path
+      %li
         %a{ href: '/dashboard/sample' }
           %i.fa.fa-camera.fa-fw
           | Sample Dashboard

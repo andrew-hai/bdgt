@@ -29,6 +29,10 @@ en:
       cost_category:
         name: 'Name'
         description: 'Description'
+      fund:
+        name: 'Name'
+        currency: 'Currency'
+        description: 'Description'
     placeholders:
       cost:
         name: 'Cost name'
@@ -37,6 +41,9 @@ en:
       cost_category:
         name: 'Cost category name'
         description: 'Cost categort description'
+      fund:
+        name: 'Fund name'
+        description: 'Fund description'
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'
@@ -50,3 +57,5 @@ en:
     prompts:
       cost:
         cost_category_id: 'Select cost category'
+      fund:
+        currency: 'Select fund currency'

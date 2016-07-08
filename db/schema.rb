@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621153341) do
+ActiveRecord::Schema.define(version: 20160705160601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 20160621153341) do
 
   add_index "costs", ["cost_category_id"], name: "index_costs_on_cost_category_id", using: :btree
   add_index "costs", ["user_id"], name: "index_costs_on_user_id", using: :btree
+
+  create_table "funds", force: :cascade do |t|
+    t.string   "name"
+    t.string   "currency"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username",               default: "", null: false
