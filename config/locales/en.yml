@@ -38,6 +38,10 @@ en:
   funds_list: 'Funds list'
   new_fund: 'New Fund'
   edit_fund: 'Edit Fund'
+  fund_changes_list: 'Fund changes list'
+  fund_changes:
+    incoming: 'Incoming'
+    outgoing: 'Outgoing'
   dashboard: 'Dashboard'
   save: 'Save'
   name: 'Name'
@@ -51,3 +55,4 @@ en:
   edit: 'Edit'
   destroy: 'Destroy'
   a_u_sure: 'Are you sure?'
+  type: 'Type'

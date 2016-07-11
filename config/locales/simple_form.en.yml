@@ -31,6 +31,7 @@ en:
         description: 'Description'
       fund:
         name: 'Name'
+        amount: 'Amount'
         currency: 'Currency'
         description: 'Description'
     placeholders:
@@ -43,6 +44,7 @@ en:
         description: 'Cost categort description'
       fund:
         name: 'Fund name'
+        amount: 'Fund amount'
         description: 'Fund description'
     # hints:
     #   defaults:

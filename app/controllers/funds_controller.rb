@@ -5,6 +5,7 @@ class FundsController < ApplicationController
   # GET /funds.json
   def index
     @funds = Fund.all
+    @fund_changes = FundChange.includes(:fund).order('id DESC').limit(40)
   end
 
   # GET /funds/1
@@ -69,6 +70,6 @@ class FundsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fund_params
-      params.require(:fund).permit(:name, :currency, :description)
+      params.require(:fund).permit(:name, :amount, :currency, :description)
     end
 end
