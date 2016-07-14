@@ -20,8 +20,8 @@ working_directory app_path
 # rails_env 'production'
 
 # Log everything to one file
-stderr_path '/var/www/bdgt/current/log/production.log'
-stdout_path '/var/www/bdgt/current/log/production.log'
+stderr_path '/var/www/bdgt/shared/log/production.log'
+stdout_path '/var/www/bdgt/shared/log/production.log'
 
 # Set master PID location
 pid "#{deploy_to}/shared/unicorn.pid"
