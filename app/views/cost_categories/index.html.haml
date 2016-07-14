@@ -3,6 +3,12 @@
     %h2.page-header= t(:cost_categories)
 .row
   .col-lg-12
+    %p.pull-right
+      = link_to new_cost_category_path, class: 'btn btn-success' do
+        %i.fa.fa-plus.fa-fw
+        = t(:add_new_cost_category)
+.row
+  .col-lg-12
     .panel.panel-default
       .panel-heading= t(:cost_categories_list)
       .panel-body
@@ -21,4 +27,3 @@
                   %td
                     = link_to t(:edit), edit_cost_category_path(cost_category)
                     = link_to t(:destroy), cost_category, method: :delete, data: { confirm: t(:a_u_sure) }
-    = link_to t(:add_new_cost_category), new_cost_category_path, class: 'btn btn-success'

@@ -5,7 +5,7 @@ class CostsController < ApplicationController
   # GET /costs
   # GET /costs.json
   def index
-    @costs = Cost.includes(:user).all
+    @costs = Cost.includes(:user).order('id DESC')
   end
 
   # GET /costs/new

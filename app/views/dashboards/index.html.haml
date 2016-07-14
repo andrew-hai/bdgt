@@ -2,12 +2,6 @@
   .col-lg-12
     %h2.page-header= t(:dashboard)
 
-.row.visible-xs-block.form-group
-  .col-lg-12
-    = link_to new_cost_path, class: 'btn btn-success btn-lg btn-block' do
-      %i.fa.fa-plus
-      = t(:add_new_cost)
-
 / TODO first row should be boxes with info
 
 = render 'second_row_charts'

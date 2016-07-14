@@ -3,7 +3,7 @@
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1' }
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' }
 
-    %title>Bdgt</title>
+    %title Bdgt
     = stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -12,4 +12,10 @@
     #wrapper
       = render 'shared/navigation'
       #page-wrapper
+        .row.visible-xs-block
+          .col-lg-12.top-space-big
+            = link_to new_cost_path, class: 'btn btn-success btn-lg btn-block' do
+              %i.fa.fa-plus
+              = t(:add_new_cost)
+
         = yield

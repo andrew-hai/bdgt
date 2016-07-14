@@ -1,6 +1,12 @@
 .row
   .col-lg-12
     %h2.page-header= t(:costs)
+.row.hidden-xs
+  .col-lg-12
+    %p.pull-right
+      = link_to new_cost_path, class: 'btn btn-success' do
+        %i.fa.fa-plus
+        = t(:add_new_cost)
 .row
   .col-lg-12
     .panel.panel-default
@@ -29,6 +35,3 @@
                   %td
                     = link_to t(:edit), edit_cost_path(cost)
                     = link_to t(:destroy), cost, method: :delete, data: { confirm: t(:a_u_sure) }
-    = link_to new_cost_path, class: 'btn btn-success' do
-      %i.fa.fa-plus
-      = t(:add_new_cost)

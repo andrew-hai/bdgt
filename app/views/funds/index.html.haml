@@ -1,32 +1,15 @@
 .row
   .col-lg-12
     %h2.page-header= t(:funds)
-
-= link_to t(:add_new_fund), new_fund_path, class: 'btn btn-success m-b-1'
-
 .row
   .col-lg-12
-    .panel.panel-default
-      .panel-heading= t(:funds_list)
-      .panel-body
-        .table-responsive
-          %table.table
-            %thead
-              %tr
-                %th= t(:name)
-                %th= t(:amount)
-                %th= t(:currency)
-                %th= t(:description)
-                %th= t(:actions)
-            %tbody
-              - @funds.each do |fund|
-                %tr
-                  %td= fund.name
-                  %td= fund.amount
-                  %td= fund.currency
-                  %td= fund.description
-                  %td
-                    = link_to t(:edit), edit_fund_path(fund)
-                    = link_to t(:destroy), fund, method: :delete, data: { confirm: t(:a_u_sure) }
+    %p.pull-right
+      = link_to new_fund_path, class: 'btn btn-success' do
+        %i.fa.fa-plus
+        = t(:add_new_fund)
+
+= render 'summary_by_currency'
+
+= render 'list'
 
 = render 'changes_list'
