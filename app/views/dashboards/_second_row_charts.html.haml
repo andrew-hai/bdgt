@@ -3,7 +3,7 @@
     .panel.panel-default
       .panel-heading
         %i.fa.fa-bar-chart-o.fa-fw 
-        Area Chart Example
+        Расходы за последние 30 дней
         .pull-right
           .btn-group
             %button.btn.btn-default.btn-xs.dropdown-toggle{ type: 'button', 'data-toggle' => 'dropdown' }
@@ -30,3 +30,15 @@
       .panel-body
         #morris-donut-chart
         %a.btn.btn-default.btn-block{ href: '#' } View Details
+
+:javascript
+  Morris.Area({
+    element: 'morris-area-chart',
+    data: #{@js_data.to_json},
+    xkey: 'spent_on',
+    ykeys: #{CostCategory.all.map { |c| "category_#{c.id}" }.to_json},
+    labels: #{CostCategory.all.map(&:name).to_json},
+    pointSize: 2,
+    hideHover: 'auto',
+    resize: true
+  });

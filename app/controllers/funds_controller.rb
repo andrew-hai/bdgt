@@ -5,6 +5,7 @@ class FundsController < ApplicationController
   # GET /funds.json
   def index
     @funds = Fund.all
+    @grouped = Fund.group(:currency).sum(:amount)
     @fund_changes = FundChange.includes(:fund).order('id DESC').limit(40)
   end
 
