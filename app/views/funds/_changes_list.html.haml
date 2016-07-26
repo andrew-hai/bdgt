@@ -16,3 +16,7 @@
                   %td= change.fund.name
                   %td= change.amount
                   %td= t("fund_changes.#{change.fc_type}")
+.row
+  .col-lg-12
+    = paginate @fund_changes
+

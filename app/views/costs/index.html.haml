@@ -35,3 +35,8 @@
                   %td
                     = link_to t(:edit), edit_cost_path(cost)
                     = link_to t(:destroy), cost, method: :delete, data: { confirm: t(:a_u_sure) }
+
+  .col-lg-12
+    = paginate @costs
+
+

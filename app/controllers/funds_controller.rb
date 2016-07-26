@@ -6,7 +6,7 @@ class FundsController < ApplicationController
   def index
     @funds = Fund.all
     @grouped = Fund.group(:currency).sum(:amount)
-    @fund_changes = FundChange.includes(:fund).order('id DESC').limit(40)
+    @fund_changes = FundChange.includes(:fund).order('id DESC').page(params[:page])
   end
 
   # GET /funds/1
