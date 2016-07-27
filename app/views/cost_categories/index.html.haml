@@ -17,13 +17,17 @@
             %thead
               %tr
                 %th= t(:name)
+                %th= t(:month_limit)
                 %th= t(:description)
                 %th= t(:actions)
             %tbody
               - @cost_categories.each do |cost_category|
                 %tr
                   %td= cost_category.name
+                  %td= cost_category.month_limit
                   %td= cost_category.description
                   %td
-                    = link_to t(:edit), edit_cost_category_path(cost_category)
-                    = link_to t(:destroy), cost_category, method: :delete, data: { confirm: t(:a_u_sure) }
+                    = link_to edit_cost_category_path(cost_category), title: t(:edit) do
+                      %i.fa.fa-pencil.fa-fw
+                    = link_to cost_category, method: :delete, title: t(:destroy), data: { confirm: t(:a_u_sure) } do
+                      %i.fa.fa-trash-o.fa-fw

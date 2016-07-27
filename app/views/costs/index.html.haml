@@ -30,13 +30,13 @@
                   %td= cost.cost_category.name
                   %td= cost.amount
                   %td= cost.description
-                  %td= cost.spent_on
+                  %td= l(cost.spent_on)
                   %td= cost.user.try(:username)
                   %td
-                    = link_to t(:edit), edit_cost_path(cost)
-                    = link_to t(:destroy), cost, method: :delete, data: { confirm: t(:a_u_sure) }
+                    = link_to edit_cost_path(cost), title: t(:edit) do
+                      %i.fa.fa-pencil.fa-fw
+                    = link_to cost, method: :delete, title: t(:destroy), data: { confirm: t(:a_u_sure) } do
+                      %i.fa.fa-trash-o.fa-fw
 
   .col-lg-12
     = paginate @costs
-
-

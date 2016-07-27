@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711150732) do
+ActiveRecord::Schema.define(version: 20160727151616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 20160711150732) do
   create_table "cost_categories", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "month_limit", default: 2000
   end
 
   create_table "costs", force: :cascade do |t|
@@ -43,6 +44,8 @@ ActiveRecord::Schema.define(version: 20160711150732) do
     t.integer  "fund_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "from"
+    t.integer  "to"
   end
 
   add_index "fund_changes", ["fund_id"], name: "index_fund_changes_on_fund_id", using: :btree

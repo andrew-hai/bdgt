@@ -11,6 +11,8 @@ class Fund < ActiveRecord::Base
     if changes.key?(:amount)
       fund_changes.create(
         amount: (changes[:amount][1] - changes[:amount][0].to_i).abs,
+        from: changes[:amount][0],
+        to: changes[:amount][1],
         fc_type: (changes[:amount][1] - changes[:amount][0].to_i) > 0 ? :incoming : :outgoing
       )
     end

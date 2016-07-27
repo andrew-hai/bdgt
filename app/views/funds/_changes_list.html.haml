@@ -10,13 +10,14 @@
                 %th= t(:name)
                 %th= t(:amount)
                 %th= t(:type)
+                %th= t(:created_at)
             %tbody
               - @fund_changes.each do |change|
                 %tr
                   %td= change.fund.name
                   %td= change.amount
                   %td= t("fund_changes.#{change.fc_type}")
+                  %td= l(change.created_at.to_date)
 .row
   .col-lg-12
     = paginate @fund_changes
-

@@ -1,0 +1,61 @@
+.row
+  .col-lg-3.col-md-6
+    .panel.panel-primary
+      .panel-heading
+        .row
+          .col-xs-3
+            %i.fa.fa-eur.fa-5x
+          .col-xs-9.text-right
+            .huge= @grouped['EUR'] || 0
+            %div EUR!
+      %a{ href: '#' }
+        .panel-footer
+          %span.pull-left View Details
+          %span.pull-right
+            %i.fa.fa-arrow-circle-right
+          .clearfix
+  .col-lg-3.col-md-6
+    .panel.panel-green
+      .panel-heading
+        .row
+          .col-xs-3
+            %i.fa.fa-usd.fa-5x
+          .col-xs-9.text-right
+            .huge= @grouped['USD'] || 0
+            %div USD!
+      %a{ href: '#' }
+        .panel-footer
+          %span.pull-left View Details
+          %span.pull-right
+            %i.fa.fa-arrow-circle-right
+          .clearfix
+  .col-lg-3.col-md-6
+    .panel.panel-yellow
+      .panel-heading
+        .row
+          .col-xs-3
+            %i.fa.fa-bitcoin.fa-5x
+          .col-xs-9.text-right
+            .huge= @grouped['UAH'] || 0
+            %div UAH!
+      %a{ href: '#' }
+        .panel-footer
+          %span.pull-left View Details
+          %span.pull-right
+            %i.fa.fa-arrow-circle-right
+          .clearfix
+  .col-lg-3.col-md-6
+    .panel.panel-yellow
+      .panel-heading
+        .row
+          .col-xs-3
+            %i.fa.fa-ruble.fa-5x
+          .col-xs-9.text-right
+            .huge= @grouped['RUR'] || 0
+            %div RUR!
+      %a{ href: '#' }
+        .panel-footer
+          %span.pull-left View Details
+          %span.pull-right
+            %i.fa.fa-arrow-circle-right
+          .clearfix

@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
+  date:
+    formats:
+      default: '%d %B, %Y'
   add_new_cost: 'Добавить новый расход'
   cost: 'Расход'
   costs: 'Расходы'
@@ -32,6 +35,7 @@ ru:
   cost_categories_list: 'Список категорий расходов'
   new_cost_category: 'Новая категория расходов'
   edit_cost_category: 'Редактировать категорию расходов'
+  month_limit: 'Месячный лимит'
   add_new_fund: 'Добавить новое денежное средство'
   fund: 'Денежное средство'
   funds: 'Денежные средства'
@@ -51,6 +55,7 @@ ru:
   currency: 'Валюта'
   amount: 'Сумма'
   spent_on: 'Потрачено'
+  created_at: 'Создано'
   user: 'Пользователь'
   edit: 'Редактировать'
   destroy: 'Удалить'

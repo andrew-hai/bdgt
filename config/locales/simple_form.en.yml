@@ -28,6 +28,7 @@ en:
         spent_on: 'Spent on'
       cost_category:
         name: 'Name'
+        month_limit: 'Month limit'
         description: 'Description'
       fund:
         name: 'Name'
@@ -41,6 +42,7 @@ en:
         description: 'Cost description'
       cost_category:
         name: 'Cost category name'
+        month_limit: 'Cost category month limit'
         description: 'Cost categort description'
       fund:
         name: 'Fund name'

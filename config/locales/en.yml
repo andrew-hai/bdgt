@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  date:
+    formats:
+      default: '%d %B, %Y'
   add_new_cost: 'Add new cost'
   cost: 'Cost'
   costs: 'Costs'
@@ -32,6 +35,7 @@ en:
   cost_categories_list: 'Cost categories list'
   new_cost_category: 'New Cost Category'
   edit_cost_category: 'Edit Cost Category'
+  month_limit: 'Month limit'
   add_new_fund: 'Add new fund'
   fund: 'Fund'
   funds: 'Funds'
@@ -51,6 +55,7 @@ en:
   currency: 'Currency'
   amount: 'Amount'
   spent_on: 'Spent On'
+  created_at: 'Created At'
   user: 'User'
   edit: 'Edit'
   destroy: 'Destroy'
