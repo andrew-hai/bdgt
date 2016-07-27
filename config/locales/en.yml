@@ -42,6 +42,7 @@ en:
   funds_list: 'Funds list'
   new_fund: 'New Fund'
   edit_fund: 'Edit Fund'
+  fund_changed_form_to: 'Fund was changed from %{from} to %{to}'
   fund_changes_list: 'Fund changes list'
   fund_changes:
     incoming: 'Incoming'

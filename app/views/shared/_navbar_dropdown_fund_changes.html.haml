@@ -1,0 +1,19 @@
+%li.dropdown
+  %a.dropdown-toggle{ 'data-toggle' => 'dropdown', href: '#' }
+    %i.fa.fa-credit-card.fa-fw 
+    %i.fa.fa-caret-down
+
+  %ul.dropdown-menu.dropdown-messages
+    - NavbarDropdownPresenter.fund_changes.each do |change|
+      %li
+        %a{ href: '#' }
+          %div
+            %strong= change.fund.name
+            %span.pull-right.text-muted
+              %em= l(change.created_at.to_date)
+          %div= t(:fund_changed_form_to, from: change.from, to: change.to)
+      %li.divider
+    %li
+      = link_to funds_path, class: 'text-center' do
+        %strong= t(:funds_list)
+        %i.fa.fa-angle-right
