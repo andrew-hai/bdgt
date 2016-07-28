@@ -1,4 +1,4 @@
-class FundChange < ActiveRecord::Base
+class FundChange < ApplicationRecord
   CURRENCIES = ['EUR', 'RUR', 'UAH', 'USD'].freeze
 
   enum fc_type: [:incoming, :outgoing]

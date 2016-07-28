@@ -1,4 +1,4 @@
-class Fund < ActiveRecord::Base
+class Fund < ApplicationRecord
   CURRENCIES = ['EUR', 'RUR', 'UAH', 'USD'].freeze
 
   after_save :create_fund_change
