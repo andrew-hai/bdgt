@@ -1,0 +1,24 @@
+%li.dropdown
+  %a.dropdown-toggle{ 'data-toggle' => 'dropdown', href: '#' }
+    %i.fa.fa-tasks.fa-fw
+    %i.fa.fa-caret-down
+  %ul.dropdown-menu.dropdown-tasks
+    - CostCategoryPresenter.month_limits(4).each do |limit|
+      %li
+        %a{ href: '#' }
+          %div
+            %p
+              %strong= limit[:name]
+              %span.pull-right.text-muted
+                = limit[:progress]
+                Completed
+            .progress.progress-striped.active
+              .progress-bar{class: progress_bar_class(limit[:progress]), role: 'progressbar', 'aria-valuenow' => limit[:progress], 'aria-valuemin' => 0, 'aria-valuemax' => 100, style: "width: #{limit[:progress]}%" }
+                %span.sr-only
+                  = limit[:progress]
+                  Completed (success)
+      %li.divider
+    %li
+      = link_to cost_categories_path, class: 'text-center' do
+        %strong= t(:cost_categories_list)
+        %i.fa.fa-angle-right

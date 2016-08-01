@@ -8,7 +8,7 @@
           .col-xs-9.text-right
             .huge= @grouped['EUR'] || 0
             %div EUR!
-      %a{ href: '#' }
+      = link_to funds_path do
         .panel-footer
           %span.pull-left View Details
           %span.pull-right
@@ -23,7 +23,7 @@
           .col-xs-9.text-right
             .huge= @grouped['USD'] || 0
             %div USD!
-      %a{ href: '#' }
+      = link_to funds_path do
         .panel-footer
           %span.pull-left View Details
           %span.pull-right
@@ -38,7 +38,7 @@
           .col-xs-9.text-right
             .huge= @grouped['UAH'] || 0
             %div UAH!
-      %a{ href: '#' }
+      = link_to funds_path do
         .panel-footer
           %span.pull-left View Details
           %span.pull-right
@@ -53,7 +53,7 @@
           .col-xs-9.text-right
             .huge= @grouped['RUR'] || 0
             %div RUR!
-      %a{ href: '#' }
+      = link_to funds_path do
         .panel-footer
           %span.pull-left View Details
           %span.pull-right

@@ -22,7 +22,8 @@
 en:
   date:
     formats:
-      default: '%d %B, %Y'
+      default: '%-d %B, %Y'
+      short: '%-d %B'
   add_new_cost: 'Add new cost'
   cost: 'Cost'
   costs: 'Costs'

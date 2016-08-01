@@ -29,7 +29,8 @@
         Расходы по категориям
       .panel-body
         #morris-donut-chart
-        %a.btn.btn-default.btn-block{ href: '#' } View Details
+        = link_to costs_path, class: 'btn btn-default btn-block' do
+          View Details
 
 :javascript
   Morris.Area({
@@ -40,7 +41,8 @@
     labels: #{CostCategory.all.map(&:name).to_json},
     pointSize: 2,
     hideHover: 'auto',
-    resize: true
+    resize: true,
+    parseTime: false
   });
 
   Morris.Donut({

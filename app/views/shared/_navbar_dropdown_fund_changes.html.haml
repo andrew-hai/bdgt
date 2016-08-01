@@ -11,7 +11,7 @@
             %strong= change.fund.name
             %span.pull-right.text-muted
               %em= l(change.created_at.to_date)
-          %div= t(:fund_changed_form_to, from: change.from, to: change.to)
+          %div= t(:fund_changed_form_to, from: "#{change.from} #{change.fund.currency}", to: "#{change.to} #{change.fund.currency}")
       %li.divider
     %li
       = link_to funds_path, class: 'text-center' do
