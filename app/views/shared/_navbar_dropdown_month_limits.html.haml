@@ -9,14 +9,14 @@
           %div
             %p
               %strong= limit[:name]
-              %span.pull-right.text-muted
-                = limit[:progress]
-                Completed
+              %span.text-muted
+                = "#{limit[:progress]}%"
+                = "(#{t(:spent_amount_limit, amount: limit[:month_amount], limit: limit[:month_limit])})"
             .progress.progress-striped.active
-              .progress-bar{class: progress_bar_class(limit[:progress]), role: 'progressbar', 'aria-valuenow' => limit[:progress], 'aria-valuemin' => 0, 'aria-valuemax' => 100, style: "width: #{limit[:progress]}%" }
+              .progress-bar{ class: progress_bar_class(limit[:progress]), role: 'progressbar', 'aria-valuenow' => limit[:progress], 'aria-valuemin' => 0, 'aria-valuemax' => 100, style: "width: #{limit[:progress]}%" }
                 %span.sr-only
-                  = limit[:progress]
-                  Completed (success)
+                  = "#{limit[:progress]}%"
+                  = "(#{t(:spent_amount_limit, amount: limit[:month_amount], limit: limit[:month_limit])})"
       %li.divider
     %li
       = link_to cost_categories_path, class: 'text-center' do

@@ -1,0 +1,24 @@
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading= t(:all_month_limits)
+      .panel-body
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th= t(:name)
+                %th= t(:month_limit)
+                %th= t(:month_amount)
+                %th= t(:difference)
+            %tbody
+              - CostCategoryPresenter.month_limits.each do |limit|
+                %tr
+                  %td= limit[:name]
+                  %td= limit[:month_limit]
+                  %td= limit[:month_amount]
+                  %td= limit[:month_limit] - limit[:month_amount]
+                %tr
+                  %td.border-top-none{ colspan: 4 }
+                    .progress.progress-striped.active
+                      .progress-bar{ class: progress_bar_class(limit[:progress]), role: 'progressbar', 'aria-valuenow' => limit[:progress], 'aria-valuemin' => 0, 'aria-valuemax' => 100, style: "width: #{limit[:progress]}%" }

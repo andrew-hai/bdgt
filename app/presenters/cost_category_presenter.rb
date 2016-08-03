@@ -1,7 +1,7 @@
 class CostCategoryPresenter
   def self.month_limits(limit = nil)
     CostCategory.joins(:costs)
-      .where(costs: { spent_on: (Date.current - 30.days)..Date.current })
+      .where(costs: { spent_on: Date.current.beginning_of_month..Date.current.end_of_month })
       .select('SUM(costs.amount) AS month_amount', :name, :month_limit)
       .group('cost_categories.name, cost_categories.month_limit')
       .order('month_amount DESC')
@@ -11,15 +11,15 @@ class CostCategoryPresenter
           name: s.name,
           month_amount: s.month_amount,
           month_limit: s.month_limit,
-          progress: progress(s.month_limit, s.month_amount)
+          progress: progress(s.month_amount, s.month_limit)
         }
       end
   end
 
-  def self.progress(limit, amount)
+  def self.progress(amount, limit)
     case
     when amount && limit
-      (limit.to_f / amount * 100).round
+      (amount.to_f / limit * 100).round
     end 
   end
 end
