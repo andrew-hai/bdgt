@@ -15,7 +15,7 @@
             %tbody
               - @funds.each do |fund|
                 %tr
-                  %td= fund.name
+                  %td= "#{fund.name} (#{fund.currency})"
                   %td= fund.amount
                   %td= fund.currency
                   %td= fund.description

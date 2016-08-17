@@ -3,22 +3,22 @@
     .panel.panel-default
       .panel-heading
         %i.fa.fa-bar-chart-o.fa-fw 
-        Расходы за последние 30 дней
+        = t('30_days_costs')
         .pull-right
           .btn-group
             %button.btn.btn-default.btn-xs.dropdown-toggle{ type: 'button', 'data-toggle' => 'dropdown' }
-              Actions
+              = t(:actions)
               %span.caret
             %ul.dropdown-menu.pull-right{ role: 'menu' }
               %li
-                %a{ href: "#" } Action
+                %a{ href: '#' } Action
               %li
-                %a{ href: "#" } Another action
+                %a{ href: '#' } Another action
               %li
-                %a{ href: "#" } Something else here
+                %a{ href: '#' } Something else here
               %li.divider
               %li
-                %a{ href: "#" } Separated link
+                %a{ href: '#' } Separated link
       .panel-body
         #morris-area-chart
 
@@ -26,11 +26,11 @@
     .panel.panel-default
       .panel-heading
         %i.fa.fa-bar-chart-o.fa-fw
-        Расходы по категориям
+        = t(:categories_sosts)
       .panel-body
         #morris-donut-chart
-        = link_to costs_path, class: 'btn btn-default btn-block' do
-          View Details
+        .text-center
+          %b= t(:whole_time_sum, sum: @js_donut_chart_data.map{ |i| i[:value] }.sum)
 
 :javascript
   Morris.Area({
