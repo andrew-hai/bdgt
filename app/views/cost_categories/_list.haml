@@ -8,12 +8,14 @@
             %thead
               %tr
                 %th= t(:name)
+                %th= t(:month_limit)
                 %th= t(:description)
                 %th= t(:actions)
             %tbody
               - @cost_categories.each do |cost_category|
                 %tr
                   %td= cost_category.name
+                  %td= cost_category.month_limit
                   %td= cost_category.description
                   %td
                     = link_to edit_cost_category_path(cost_category), title: t(:edit) do
