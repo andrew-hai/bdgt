@@ -14,7 +14,7 @@
                 = "(#{t(:spent_amount_limit, amount: limit[:month_amount], limit: limit[:month_limit])})"
             .progress.progress-striped.active
               .progress-bar{ class: progress_bar_class(limit[:progress]), role: 'progressbar', 'aria-valuenow' => limit[:progress], 'aria-valuemin' => 0, 'aria-valuemax' => 100, style: "width: #{limit[:progress]}%" }
-                %span.sr-only
+                %span
                   = "#{limit[:progress]}%"
                   = "(#{t(:spent_amount_limit, amount: limit[:month_amount], limit: limit[:month_limit])})"
       %li.divider

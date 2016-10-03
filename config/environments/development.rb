@@ -22,6 +22,7 @@ Rails.application.configure do
     }
   else
     config.action_controller.perform_caching = false
+    # config.action_controller.perform_caching = true
 
     config.cache_store = :null_store
   end

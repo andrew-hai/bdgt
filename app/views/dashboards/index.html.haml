@@ -4,6 +4,8 @@
 
 = render 'first_row_summary_by_currency'
 
-= render 'second_row_charts'
+= cache last_cost do
+  = render 'second_row_charts'
+
 
 = render 'costs_list'

@@ -4,21 +4,22 @@
       .panel-heading
         %i.fa.fa-bar-chart-o.fa-fw 
         = t('30_days_costs')
-        .pull-right
-          .btn-group
-            %button.btn.btn-default.btn-xs.dropdown-toggle{ type: 'button', 'data-toggle' => 'dropdown' }
-              = t(:actions)
-              %span.caret
-            %ul.dropdown-menu.pull-right{ role: 'menu' }
-              %li
-                %a{ href: '#' } Action
-              %li
-                %a{ href: '#' } Another action
-              %li
-                %a{ href: '#' } Something else here
-              %li.divider
-              %li
-                %a{ href: '#' } Separated link
+        - if false
+          .pull-right
+            .btn-group
+              %button.btn.btn-default.btn-xs.dropdown-toggle{ type: :button, 'data-toggle' => 'dropdown' }
+                = t(:actions)
+                %span.caret
+              %ul.dropdown-menu.pull-right{ role: :menu }
+                %li
+                  %a{ href: '#' } Action
+                %li
+                  %a{ href: '#' } Another action
+                %li
+                  %a{ href: '#' } Something else here
+                %li.divider
+                %li
+                  %a{ href: '#' } Separated link
       .panel-body
         #morris-area-chart
 
@@ -30,12 +31,12 @@
       .panel-body
         #morris-donut-chart
         .text-center
-          %b= t(:whole_time_sum, sum: @js_donut_chart_data.map{ |i| i[:value] }.sum)
+          %b= t(:whole_time_sum, sum: js_donut_chart_data.map{ |i| i[:value] }.sum)
 
 :javascript
   Morris.Area({
     element: 'morris-area-chart',
-    data: #{@js_area_chart_data.to_json},
+    data: #{js_area_chart_data.to_json},
     xkey: 'spent_on',
     ykeys: #{CostCategory.all.map { |c| "category_#{c.id}" }.to_json},
     labels: #{CostCategory.all.map(&:name).to_json},
@@ -47,6 +48,6 @@
 
   Morris.Donut({
     element: 'morris-donut-chart',
-    data: #{@js_donut_chart_data.to_json},
+    data: #{js_donut_chart_data.to_json},
     resize: true
   });

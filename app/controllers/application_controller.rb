@@ -6,4 +6,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   layout 'authorized'
+
+  def last_cost
+    @last_cost ||= Cost.order(updated_at: :desc).first
+  end
+  helper_method :last_cost
 end
