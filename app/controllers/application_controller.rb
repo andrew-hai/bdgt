@@ -8,10 +8,10 @@ class ApplicationController < ActionController::Base
   layout 'authorized'
 
   private def expire_last_cost_fragments
-    expire_fragment(%r{last_cost\..*})
+    expire_fragment(%r{last_cost\..*}) if response.status.in?([200, 302])
   end
 
   private def expire_fund_change_fragments
-    expire_fragment(%r{fund_change\..*})
+    expire_fragment(%r{fund_change\..*}) if response.status.in?([200, 302])
   end
 end

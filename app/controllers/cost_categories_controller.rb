@@ -1,5 +1,6 @@
 class CostCategoriesController < ApplicationController
   before_action :set_cost_category, only: [:show, :edit, :update, :destroy]
+  after_action :expire_last_cost_fragments, only: [:create, :update, :destroy]
 
   # GET /cost_categories
   # GET /cost_categories.json
@@ -26,7 +27,7 @@ class CostCategoriesController < ApplicationController
         format.html { redirect_to cost_categories_url, notice: 'Cost category was successfully created.' }
         format.json { render :show, status: :created, location: @cost_category }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @cost_category.errors, status: :unprocessable_entity }
       end
     end
@@ -40,7 +41,7 @@ class CostCategoriesController < ApplicationController
         format.html { redirect_to cost_categories_url, notice: 'Cost category was successfully updated.' }
         format.json { render :show, status: :ok, location: @cost_category }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @cost_category.errors, status: :unprocessable_entity }
       end
     end

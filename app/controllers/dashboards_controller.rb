@@ -1,7 +1,7 @@
 class DashboardsController < ApplicationController
   def index
-    @costs = Cost.includes(:user).order('costs.id DESC').limit(20)
-    @grouped = Fund.group(:currency).sum(:amount)
+    @costs = Cost.includes(:user, :cost_category)
+      .order('costs.id DESC').limit(20)
   end
 
   def sample; end

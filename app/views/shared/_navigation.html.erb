@@ -12,8 +12,14 @@
   <!-- /.navbar-header -->
 
   <ul class="nav navbar-top-links navbar-right">
-    <%= render 'shared/navbar_dropdown_fund_changes' %>
-    <%= render 'shared/navbar_dropdown_month_limits' %>
+
+    <% cache 'fund_change.shared.navbar_dropdown_fund_changes' do %>
+      <%= render 'shared/navbar_dropdown_fund_changes' %>
+    <% end %>
+    <% cache 'last_cost.shared.navbar_dropdown_month_limits' do %>
+      <%= render 'shared/navbar_dropdown_month_limits' %>
+    <% end %>
+
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>

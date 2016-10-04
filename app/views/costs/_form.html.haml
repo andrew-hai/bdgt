@@ -4,7 +4,7 @@
       = f.error_notification
       %fieldset
         = f.input :name
-        = f.input :cost_category_id, collection: @categories, prompt: :translate
+        = f.input :cost_category_id, collection: cost_categories, prompt: :translate
         = f.input :amount
         = f.input :description
         = f.input :spent_on

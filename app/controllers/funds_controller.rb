@@ -6,7 +6,6 @@ class FundsController < ApplicationController
   # GET /funds.json
   def index
     @funds = Fund.all
-    @grouped = Fund.group(:currency).sum(:amount)
     @fund_changes = FundChange.includes(:fund).order('id DESC').page(params[:page])
   end
 
@@ -34,7 +33,7 @@ class FundsController < ApplicationController
         format.html { redirect_to funds_url, notice: 'Fund was successfully created.' }
         format.json { render :show, status: :created, location: @fund }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @fund.errors, status: :unprocessable_entity }
       end
     end
@@ -48,7 +47,7 @@ class FundsController < ApplicationController
         format.html { redirect_to funds_url, notice: 'Fund was successfully updated.' }
         format.json { render :show, status: :ok, location: @fund }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @fund.errors, status: :unprocessable_entity }
       end
     end

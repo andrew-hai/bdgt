@@ -8,6 +8,6 @@
         %i.fa.fa-plus.fa-fw
         = t(:add_new_cost_category)
 
-= render 'all_month_limits'
-
-= render 'list'
+= cache 'last_cost.cost_categories.index' do
+  = render 'all_month_limits'
+  = render 'list'

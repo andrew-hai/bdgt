@@ -8,9 +8,8 @@
         %i.fa.fa-plus
         = t(:add_new_fund)
 
-= render 'summary_by_currency'
-
-= render 'list'
+= cache 'fund_change.funds.index' do
+  = render 'summary_by_currency'
+  = render 'list'
 
 = render 'changes_list'
-

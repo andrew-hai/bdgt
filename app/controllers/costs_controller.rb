@@ -1,6 +1,5 @@
 class CostsController < ApplicationController
   before_action :set_cost, only: [:show, :edit, :update, :destroy]
-  before_action :set_cost_categories, only: [:new, :create, :edit, :update]
   after_action :expire_last_cost_fragments, only: [:create, :update, :destroy]
 
   # GET /costs
@@ -28,7 +27,7 @@ class CostsController < ApplicationController
         format.html { redirect_to costs_url, notice: 'Cost was successfully created.' }
         format.json { render :show, status: :created, location: @cost }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @cost.errors, status: :unprocessable_entity }
       end
     end
@@ -42,7 +41,7 @@ class CostsController < ApplicationController
         format.html { redirect_to costs_url, notice: 'Cost was successfully updated.' }
         format.json { render :show, status: :ok, location: @cost }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @cost.errors, status: :unprocessable_entity }
       end
     end
@@ -62,10 +61,6 @@ class CostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_cost
       @cost = Cost.find(params[:id])
-    end
-
-    def set_cost_categories
-      @categories = CostCategory.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
