@@ -1,6 +1,7 @@
 class CostsController < ApplicationController
   before_action :set_cost, only: [:show, :edit, :update, :destroy]
   before_action :set_cost_categories, only: [:new, :create, :edit, :update]
+  after_action :expire_last_cost_fragments, only: [:create, :update, :destroy]
 
   # GET /costs
   # GET /costs.json

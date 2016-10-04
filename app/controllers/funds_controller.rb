@@ -1,5 +1,6 @@
 class FundsController < ApplicationController
   before_action :set_fund, only: [:show, :edit, :update, :destroy]
+  after_action :expire_fund_change_fragments, only: [:create, :update, :destroy]
 
   # GET /funds
   # GET /funds.json

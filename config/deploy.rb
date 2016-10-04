@@ -54,16 +54,25 @@ namespace :deploy do
   task :restart do
     invoke 'unicorn:restart'
   end
-end
 
-namespace :deploy do
-
-  after :restart, :clear_cache do
+  after :restart, :clear_tmp do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
+      within release_path do
+        execute :rake, 'tmp:clear'
+      end
     end
   end
 end
+
+# namespace :deploy do
+
+#   after :restart, :clear_cache do
+#     on roles(:web), in: :groups, limit: 3, wait: 10 do
+#       # Here we can do anything such as:
+#       # within release_path do
+#       #   execute :rake, 'cache:clear'
+#       # end
+#     end
+#   end
+# end

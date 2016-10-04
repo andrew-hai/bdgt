@@ -7,8 +7,11 @@ class ApplicationController < ActionController::Base
 
   layout 'authorized'
 
-  def last_cost
-    @last_cost ||= Cost.order(updated_at: :desc).first
+  private def expire_last_cost_fragments
+    expire_fragment(%r{last_cost\..*})
   end
-  helper_method :last_cost
+
+  private def expire_fund_change_fragments
+    expire_fragment(%r{fund_change\..*})
+  end
 end
