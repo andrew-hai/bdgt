@@ -1,0 +1,54 @@
+.row
+  .col-lg-8
+    .panel.panel-default
+      .panel-heading
+        %i.fa.fa-bar-chart-o.fa-fw 
+        = t(:this_month_categories_costs)
+        - if false
+          .pull-right
+            .btn-group
+              %button.btn.btn-default.btn-xs.dropdown-toggle{ type: :button, 'data-toggle' => 'dropdown' }
+                = t(:actions)
+                %span.caret
+              %ul.dropdown-menu.pull-right{ role: :menu }
+                %li
+                  %a{ href: '#' } Action
+                %li
+                  %a{ href: '#' } Another action
+                %li
+                  %a{ href: '#' } Something else here
+                %li.divider
+                %li
+                  %a{ href: '#' } Separated link
+      .panel-body
+        #this-month-categories-costs-bar-chart
+        .text-center
+          %b= t(:whole_time_sum, sum: js_bar_chart_data.map{ |i| i[:month_amount] }.sum)
+
+  .col-lg-4
+    .panel.panel-default
+      .panel-heading
+        %i.fa.fa-bar-chart-o.fa-fw
+        = t(:all_time_categories_costs)
+      .panel-body
+        #all-time-categories-costs-donut-chart
+        .text-center
+          %b= t(:whole_time_sum, sum: js_donut_chart_data.map{ |i| i[:value] }.sum)
+
+:javascript
+  Morris.Bar({
+    element: 'this-month-categories-costs-bar-chart',
+    data: #{js_bar_chart_data.to_json},
+    xkey: 'category',
+    xLabelAngle: 45,
+    ykeys: ['month_amount'],
+    labels: ['#{t(:spent_on)}'],
+    hideHover: 'auto',
+    resize: true
+  });
+
+  Morris.Donut({
+    element: 'all-time-categories-costs-donut-chart',
+    data: #{js_donut_chart_data.to_json},
+    resize: true
+  });

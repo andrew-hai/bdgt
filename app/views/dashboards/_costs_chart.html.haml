@@ -1,5 +1,5 @@
 .row
-  .col-lg-8
+  .col-lg-12
     .panel.panel-default
       .panel-heading
         %i.fa.fa-bar-chart-o.fa-fw 
@@ -21,21 +21,11 @@
                 %li
                   %a{ href: '#' } Separated link
       .panel-body
-        #morris-area-chart
-
-  .col-lg-4
-    .panel.panel-default
-      .panel-heading
-        %i.fa.fa-bar-chart-o.fa-fw
-        = t(:categories_sosts)
-      .panel-body
-        #morris-donut-chart
-        .text-center
-          %b= t(:whole_time_sum, sum: js_donut_chart_data.map{ |i| i[:value] }.sum)
+        #30-days-costs-area-chart
 
 :javascript
   Morris.Area({
-    element: 'morris-area-chart',
+    element: '30-days-costs-area-chart',
     data: #{js_area_chart_data.to_json},
     xkey: 'spent_on',
     ykeys: #{cost_categories.map { |c| "category_#{c.id}" }.to_json},
@@ -44,10 +34,4 @@
     hideHover: 'auto',
     resize: true,
     parseTime: false
-  });
-
-  Morris.Donut({
-    element: 'morris-donut-chart',
-    data: #{js_donut_chart_data.to_json},
-    resize: true
   });

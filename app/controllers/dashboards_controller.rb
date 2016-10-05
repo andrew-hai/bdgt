@@ -11,6 +11,11 @@ class DashboardsController < ApplicationController
   end
   helper_method :js_area_chart_data
 
+  private def js_bar_chart_data
+    @js_bar_chart_data ||= ChartPresenter.bar_data
+  end
+  helper_method :js_bar_chart_data
+
   private def js_donut_chart_data
     @js_donut_chart_data ||= ChartPresenter.donut_data
   end

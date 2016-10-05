@@ -2,11 +2,14 @@
   .col-lg-12
     %h2.page-header= t(:dashboard)
 
-= cache 'fund_change.dashboards.index.first_row_summary_by_currency' do
-  = render 'first_row_summary_by_currency'
+= cache 'fund_change.dashboards.index.summary_by_currency' do
+  = render 'summary_by_currency'
 
-= cache 'last_cost.dashboards.index.second_row_charts' do
-  = render 'second_row_charts'
+= cache 'last_cost.dashboards.index.categories_charts' do
+  = render 'categories_charts'
+
+= cache 'last_cost.dashboards.index.costs_chart' do
+  = render 'costs_chart'
 
 = cache 'last_cost.dashboards.index.costs_list' do
   = render 'costs_list'

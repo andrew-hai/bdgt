@@ -1,10 +1,10 @@
 class ChartPresenter
   def self.area_data
     data = Cost.where(spent_on: (Date.current - 30.days)..Date.current)
-      .order('costs.id DESC').group_by { |c| c.spent_on.to_s }
+      .group_by { |c| c.spent_on.to_s }
 
-    cost_categories = CostCategory.all
-    
+    cost_categories = CostCategory.order(:name)
+
     ((Date.current - 30.days)..Date.current).map do |date|
       { spent_on: I18n.l(date, format: :short) }.tap do |o|
         cost_categories.each do |category|
@@ -16,6 +16,17 @@ class ChartPresenter
           end
         end
       end
+    end
+  end
+
+  def self.bar_data
+    data = Cost.select('SUM(amount) as month_amount, cost_category_id')
+      .where(spent_on: DateTime.current.beginning_of_month..DateTime.current.end_of_month)
+      .group(:cost_category_id)
+
+    CostCategory.order(:name).map do |category|
+      c_data = data.detect { |d| d.cost_category_id == category.id }
+      { category: category.name, month_amount: c_data.try(:month_amount) || 0 }
     end
   end
 
