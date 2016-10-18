@@ -20,6 +20,19 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
+  months:
+    January: 'Январь'
+    February: 'Февраль'
+    March: 'Март'
+    April: 'Апрель'
+    May: 'Май'
+    June: 'Июнь'
+    July: 'Июль'
+    August: 'Август'
+    September: 'Сентябрь'
+    October: 'Октябрь'
+    November: 'Ноябрь'
+    December: 'Декабрь'
   date:
     formats:
       default: '%-d %B, %Y'
@@ -32,7 +45,7 @@ ru:
   edit_cost: 'Редактировать расход'
   30_days_costs: 'Расходы за последние 30 дней'
   all_time_categories_costs: 'Расходы по категориям за все время'
-  this_month_categories_costs: 'Расходы по категориям в этом месяце'
+  month_categories_costs: 'Расходы по категориям за месяц'
   whole_time_sum: 'Всего потрачено %{sum}'
   add_new_cost_category: 'Добавить новую категорию расходов'
   cost_category: 'Категория расходов'
@@ -71,3 +84,4 @@ ru:
   type: 'Тип'
   spent_amount_limit: 'Потрачено %{amount} из %{limit}'
   difference: 'Разница'
+  choose_month_above: 'Выберите месяц выше'

@@ -65,4 +65,14 @@ Rails.application.routes.draw do
   resources :costs, except: :show
 
   devise_for :users
+
+  namespace :api do
+    namespace :v1 do
+      resources :charts, only: [] do
+        collection do
+          get :bar_month_by_category
+        end
+      end
+    end
+  end
 end

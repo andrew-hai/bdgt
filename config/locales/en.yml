@@ -32,7 +32,7 @@ en:
   edit_cost: 'Edit Cost'
   30_days_costs: 'Costs in last 30 days'
   all_time_categories_costs: 'Costs by categories for all time'
-  this_month_categories_costs: 'Costs by categories in this month'
+  month_categories_costs: 'Costs by categories by month'
   whole_time_sum: 'Spent for whole time %{sum}'
   add_new_cost_category: 'Add new cost category'
   cost_category: 'Cost category'
@@ -71,3 +71,4 @@ en:
   type: 'Type'
   spent_amount_limit: 'Spent %{amount} out of %{limit}'
   difference: 'Difference'
+  choose_month_above: 'Choose month above'

@@ -1,27 +1,25 @@
 .row
-  .col-lg-8
+  #month-categories-bar-box.col-lg-8
     .panel.panel-default
       .panel-heading
-        %i.fa.fa-bar-chart-o.fa-fw 
-        = t(:this_month_categories_costs)
-        - if false
-          .pull-right
-            .btn-group
-              %button.btn.btn-default.btn-xs.dropdown-toggle{ type: :button, 'data-toggle' => 'dropdown' }
-                = t(:actions)
-                %span.caret
-              %ul.dropdown-menu.pull-right{ role: :menu }
-                %li
-                  %a{ href: '#' } Action
-                %li
-                  %a{ href: '#' } Another action
-                %li
-                  %a{ href: '#' } Something else here
-                %li.divider
-                %li
-                  %a{ href: '#' } Separated link
+        %i.fa.fa-bar-chart-o.fa-fw
+        = t(:month_categories_costs)
+        .pull-right
+          .btn-group
+            %button.btn.btn-default.btn-xs.dropdown-toggle{ type: :button, 'data-toggle' => 'dropdown' }
+              %span.month-name
+                = t("months.#{Date::MONTHNAMES[Date.current.month]}")
+              %span.caret
+            %ul.dropdown-menu.pull-right{ role: :menu }
+              - 11.downto(0) do |i|
+                %li{ data: { url: bar_month_by_category_api_v1_charts_path(month: i) } }
+                  %a{ href: '#' }
+                    = t("months.#{Date::MONTHNAMES[(Date.current - i.month).month]}")
+              %li.divider
+              %li
+                %a{ href: '#' }= t(:choose_month_above)
       .panel-body
-        #this-month-categories-costs-bar-chart
+        #month-categories-bar-chart
         .text-center
           %b= t(:whole_time_sum, sum: js_bar_chart_data.map{ |i| i[:month_amount] }.sum)
 
@@ -31,13 +29,13 @@
         %i.fa.fa-bar-chart-o.fa-fw
         = t(:all_time_categories_costs)
       .panel-body
-        #all-time-categories-costs-donut-chart
+        #all-time-categories-donut-chart
         .text-center
           %b= t(:whole_time_sum, sum: js_donut_chart_data.map{ |i| i[:value] }.sum)
 
 :javascript
-  Morris.Bar({
-    element: 'this-month-categories-costs-bar-chart',
+  var month_categories_bar_chart = Morris.Bar({
+    element: 'month-categories-bar-chart',
     data: #{js_bar_chart_data.to_json},
     xkey: 'category',
     xLabelAngle: 45,
@@ -48,7 +46,20 @@
   });
 
   Morris.Donut({
-    element: 'all-time-categories-costs-donut-chart',
+    element: 'all-time-categories-donut-chart',
     data: #{js_donut_chart_data.to_json},
     resize: true
+  });
+
+  $('#month-categories-bar-box .dropdown-menu li').on('click', function(e){
+    e.preventDefault();
+
+    $.ajax({
+      url: $(e.currentTarget).data('url'),
+      dataType: 'json',
+      success: function(response, status, xhr) {
+        month_categories_bar_chart.setData(response);
+        $('#month-categories-bar-box .month-name').text($(e.currentTarget).text());
+      }
+    });
   });

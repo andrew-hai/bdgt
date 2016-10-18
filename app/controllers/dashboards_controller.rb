@@ -12,7 +12,7 @@ class DashboardsController < ApplicationController
   helper_method :js_area_chart_data
 
   private def js_bar_chart_data
-    @js_bar_chart_data ||= ChartPresenter.bar_data
+    @js_bar_chart_data ||= BarChartPresenter.month_by_category
   end
   helper_method :js_bar_chart_data
 
