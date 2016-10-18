@@ -6,7 +6,20 @@
         = f.input :name
         = f.input :cost_category_id, collection: cost_categories, prompt: :translate
         = f.input :amount
-        = f.input :description
-        = f.input :spent_on
+        .slide-toggle-box
+          .toggle-action.show.form-group
+            = link_to t(:show_additional_fields), '#'
+          .toggle-content.hidden
+            = f.input :description
+            = f.input :spent_on
+            .toggle-action.form-group
+              = link_to t(:hide_additional_fields), '#'
       .actions
         = f.submit t(:save), class: 'btn btn-success'
+
+:javascript
+  $('.slide-toggle-box .toggle-action').on('click', function(e) {
+    e.preventDefault();
+    var box = $(e.currentTarget).parents('.slide-toggle-box');
+    box.find('.toggle-content, .toggle-action.show').toggleClass('hidden');
+  });

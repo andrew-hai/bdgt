@@ -21,8 +21,10 @@
       .panel-body
         #month-categories-bar-chart
         .text-center
-          %b= t(:whole_time_sum, sum: js_bar_chart_data.map{ |i| i[:month_amount] }.sum)
-
+          %b
+            = t(:whole_time_sum)
+            %span.whole_time_amount
+              = js_bar_chart_data.map{ |i| i[:month_amount] }.sum
   .col-lg-4
     .panel.panel-default
       .panel-heading
@@ -31,7 +33,9 @@
       .panel-body
         #all-time-categories-donut-chart
         .text-center
-          %b= t(:whole_time_sum, sum: js_donut_chart_data.map{ |i| i[:value] }.sum)
+          %b
+            = t(:whole_time_sum)
+            = js_donut_chart_data.map{ |i| i[:value] }.sum
 
 :javascript
   var month_categories_bar_chart = Morris.Bar({
@@ -54,12 +58,22 @@
   $('#month-categories-bar-box .dropdown-menu li').on('click', function(e){
     e.preventDefault();
 
+    $('#month-categories-bar-box').css('opacity', '0.5');
     $.ajax({
       url: $(e.currentTarget).data('url'),
       dataType: 'json',
       success: function(response, status, xhr) {
         month_categories_bar_chart.setData(response);
         $('#month-categories-bar-box .month-name').text($(e.currentTarget).text());
+
+        let whole_time_amount = response.map(function(item){
+          return item['month_amount'];
+        }).reduce(function(previousValue, currentValue, index, array) {
+          return previousValue + currentValue;
+        });
+        $('#month-categories-bar-box .whole_time_amount').text(whole_time_amount);
+
+        $('#month-categories-bar-box').css('opacity', '1');
       }
     });
   });
