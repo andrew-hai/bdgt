@@ -1,31 +1,27 @@
 .row
-  .col-lg-12
+  #last-days-costs-area-box.col-lg-12
     .panel.panel-default
       .panel-heading
         %i.fa.fa-bar-chart-o.fa-fw 
         = t('30_days_costs')
-        - if false
-          .pull-right
-            .btn-group
-              %button.btn.btn-default.btn-xs.dropdown-toggle{ type: :button, 'data-toggle' => 'dropdown' }
-                = t(:actions)
-                %span.caret
-              %ul.dropdown-menu.pull-right{ role: :menu }
-                %li
-                  %a{ href: '#' } Action
-                %li
-                  %a{ href: '#' } Another action
-                %li
-                  %a{ href: '#' } Something else here
-                %li.divider
-                %li
-                  %a{ href: '#' } Separated link
+        .pull-right
+          .btn-group
+            %button.btn.btn-default.btn-xs.dropdown-toggle{ type: :button, 'data-toggle' => 'dropdown' }
+              %span.category-name= t(:all_categories)
+              %span.caret
+            %ul.dropdown-menu.pull-right{ role: :menu }
+              - cost_categories.each do |category|
+                %li{ data: { url: area_last_days_costs_api_v1_charts_path(category_id: category.id) } }
+                  %a{ href: '#' }= category.name
+              %li.divider
+              %li{ data: { url: area_last_days_costs_api_v1_charts_path } }
+                %a{ href: '#' }= t(:all_categories)
       .panel-body
-        #30-days-costs-area-chart
+        #last-days-costs-area-chart
 
 :javascript
-  Morris.Area({
-    element: '30-days-costs-area-chart',
+  var last_days_costs_area_chart = Morris.Area({
+    element: 'last-days-costs-area-chart',
     data: #{js_area_chart_data.to_json},
     xkey: 'spent_on',
     ykeys: #{cost_categories.map { |c| "category_#{c.id}" }.to_json},
@@ -34,4 +30,20 @@
     hideHover: 'auto',
     resize: true,
     parseTime: false
+  });
+
+  $('#last-days-costs-area-box .dropdown-menu li').on('click', function(e){
+    e.preventDefault();
+
+    $('#last-days-costs-area-box').css('opacity', '0.5');
+    $.ajax({
+      url: $(e.currentTarget).data('url'),
+      dataType: 'json',
+      success: function(response, status, xhr) {
+        last_days_costs_area_chart.setData(response);
+
+        $('#last-days-costs-area-box .category-name').text($(e.currentTarget).text());
+        $('#last-days-costs-area-box').css('opacity', '1');
+      }
+    });
   });

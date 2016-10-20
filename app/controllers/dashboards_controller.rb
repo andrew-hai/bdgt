@@ -7,7 +7,7 @@ class DashboardsController < ApplicationController
   def sample; end
 
   private def js_area_chart_data
-    @js_area_chart_data ||= ChartPresenter.area_data
+    @js_area_chart_data ||= AreaChartPresenter.last_days_costs
   end
   helper_method :js_area_chart_data
 

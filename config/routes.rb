@@ -70,7 +70,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :charts, only: [] do
         collection do
-          get :bar_month_by_category
+          get :bar_month_by_category, :area_last_days_costs
         end
       end
     end
