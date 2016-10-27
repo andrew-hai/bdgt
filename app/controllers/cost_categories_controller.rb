@@ -1,5 +1,4 @@
 class CostCategoriesController < ApplicationController
-  before_action :set_cost_category, only: [:show, :edit, :update, :destroy]
   after_action :expire_last_cost_fragments, only: [:create, :update, :destroy]
 
   # GET /cost_categories
@@ -23,12 +22,12 @@ class CostCategoriesController < ApplicationController
     @cost_category = CostCategory.new(cost_category_params)
 
     respond_to do |format|
-      if @cost_category.save
+      if cost_category.save
         format.html { redirect_to cost_categories_url, notice: 'Cost category was successfully created.' }
-        format.json { render :show, status: :created, location: @cost_category }
+        format.json { render :show, status: :created, location: cost_category }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @cost_category.errors, status: :unprocessable_entity }
+        format.json { render json: cost_category.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -37,12 +36,12 @@ class CostCategoriesController < ApplicationController
   # PATCH/PUT /cost_categories/1.json
   def update
     respond_to do |format|
-      if @cost_category.update(cost_category_params)
+      if cost_category.update(cost_category_params)
         format.html { redirect_to cost_categories_url, notice: 'Cost category was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cost_category }
+        format.json { render :show, status: :ok, location: cost_category }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @cost_category.errors, status: :unprocessable_entity }
+        format.json { render json: cost_category.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -50,7 +49,7 @@ class CostCategoriesController < ApplicationController
   # DELETE /cost_categories/1
   # DELETE /cost_categories/1.json
   def destroy
-    @cost_category.destroy
+    cost_category.destroy
     respond_to do |format|
       format.html { redirect_to cost_categories_url, notice: 'Cost category was successfully destroyed.' }
       format.json { head :no_content }
@@ -58,10 +57,10 @@ class CostCategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cost_category
-      @cost_category = CostCategory.find(params[:id])
+    def cost_category
+      @cost_category ||= CostCategory.find(params[:id])
     end
+    helper_method :cost_category
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cost_category_params

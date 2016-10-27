@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :funds
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -61,8 +61,10 @@ Rails.application.routes.draw do
     get :sample
   end
 
-  resources :cost_categories, except: :show
   resources :costs, except: :show
+  resources :cost_categories, except: :show
+  resources :funds, except: :show
+  resources :incomes, except: :show
 
   devise_for :users
 
@@ -70,7 +72,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :charts, only: [] do
         collection do
-          get :bar_month_by_category, :area_last_days_costs
+          get :bar_month_by_category, :area_last_days_costs, :donut_category_by_last
         end
       end
     end

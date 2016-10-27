@@ -42,6 +42,16 @@
           %li
             = link_to t(:add_new_fund), new_fund_path
       %li
+        %a{ href: '#' }
+          %i.fa.fa-download.fa-fw
+          = t(:incomes)
+          %span.fa.arrow
+        %ul.nav.nav-second-level
+          %li
+            = link_to t(:incomes_list), incomes_path
+          %li
+            = link_to t(:add_new_income), new_income_path
+      %li
         %a{ href: '/dashboard/sample' }
           %i.fa.fa-camera.fa-fw
           | Sample Dashboard

@@ -1,5 +1,4 @@
 class CostsController < ApplicationController
-  before_action :set_cost, only: [:show, :edit, :update, :destroy]
   after_action :expire_last_cost_fragments, only: [:create, :update, :destroy]
 
   # GET /costs
@@ -23,12 +22,12 @@ class CostsController < ApplicationController
     @cost = Cost.new(cost_params.merge(user: current_user))
 
     respond_to do |format|
-      if @cost.save
+      if cost.save
         format.html { redirect_to costs_url, notice: 'Cost was successfully created.' }
-        format.json { render :show, status: :created, location: @cost }
+        format.json { render :show, status: :created, location: cost }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @cost.errors, status: :unprocessable_entity }
+        format.json { render json: cost.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -37,12 +36,12 @@ class CostsController < ApplicationController
   # PATCH/PUT /costs/1.json
   def update
     respond_to do |format|
-      if @cost.update(cost_params)
+      if cost.update(cost_params)
         format.html { redirect_to costs_url, notice: 'Cost was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cost }
+        format.json { render :show, status: :ok, location: cost }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @cost.errors, status: :unprocessable_entity }
+        format.json { render json: cost.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -50,7 +49,7 @@ class CostsController < ApplicationController
   # DELETE /costs/1
   # DELETE /costs/1.json
   def destroy
-    @cost.destroy
+    cost.destroy
     respond_to do |format|
       format.html { redirect_to costs_url, notice: 'Cost was successfully destroyed.' }
       format.json { head :no_content }
@@ -58,10 +57,10 @@ class CostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cost
-      @cost = Cost.find(params[:id])
+    def cost
+      @cost ||= Cost.find(params[:id])
     end
+    helper_method :cost
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cost_params

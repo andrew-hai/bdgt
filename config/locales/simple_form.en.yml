@@ -35,6 +35,11 @@ en:
         amount: 'Amount'
         currency: 'Currency'
         description: 'Description'
+      income:
+        name: 'Name'
+        amount: 'Amount'
+        description: 'Description'
+        got_on: 'Got on'
     placeholders:
       cost:
         name: 'Cost name'
@@ -48,6 +53,10 @@ en:
         name: 'Fund name'
         amount: 'Fund amount'
         description: 'Fund description'
+      income:
+        name: 'Income name'
+        amount: 'Income amount'
+        description: 'Income description'
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'

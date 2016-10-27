@@ -25,17 +25,38 @@
             = t(:whole_time_sum)
             %span.whole_time_amount
               = js_bar_chart_data.map{ |i| i[:month_amount] }.sum
-  .col-lg-4
+
+  #last-time-categories-donut-chart-box.col-lg-4
     .panel.panel-default
       .panel-heading
         %i.fa.fa-bar-chart-o.fa-fw
-        = t(:all_time_categories_costs)
+        = t(:last_time_categories_costs)
+        .pull-right
+          .btn-group
+            %button.btn.btn-default.btn-xs.dropdown-toggle{ type: :button, 'data-toggle' => 'dropdown' }
+              %span.period-name
+                = t(:all_time)
+              %span.caret
+            %ul.dropdown-menu.pull-right{ role: :menu }
+              %li{ data: { url: donut_category_by_last_api_v1_charts_path } }
+                %a{ href: '#' }
+                  = t(:all_time)
+              %li{ data: { url: donut_category_by_last_api_v1_charts_path(period: 30) } }
+                %a{ href: '#' }
+                  = "30 #{t(:days)}"
+              %li{ data: { url: donut_category_by_last_api_v1_charts_path(period: 7) } }
+                %a{ href: '#' }
+                  = "7 #{t(:days)}"
+              %li.divider
+              %li
+                %a{ href: '#' }= t(:choose_period_above)
       .panel-body
-        #all-time-categories-donut-chart
+        #last-time-categories-donut-chart
         .text-center
           %b
             = t(:whole_time_sum)
-            = js_donut_chart_data.map{ |i| i[:value] }.sum
+            %span.whole_time_amount
+              = js_donut_chart_data.map{ |i| i[:value] }.sum
 
 :javascript
   var month_categories_bar_chart = Morris.Bar({
@@ -49,8 +70,8 @@
     resize: true
   });
 
-  Morris.Donut({
-    element: 'all-time-categories-donut-chart',
+  var last_time_categories_donut_chart = Morris.Donut({
+    element: 'last-time-categories-donut-chart',
     data: #{js_donut_chart_data.to_json},
     resize: true
   });
@@ -74,6 +95,29 @@
         $('#month-categories-bar-box .whole_time_amount').text(whole_time_amount);
 
         $('#month-categories-bar-box').css('opacity', '1');
+      }
+    });
+  });
+
+  $('#last-time-categories-donut-chart-box .dropdown-menu li').on('click', function(e){
+    e.preventDefault();
+
+    $('#last-time-categories-donut-chart-box').css('opacity', '0.5');
+    $.ajax({
+      url: $(e.currentTarget).data('url'),
+      dataType: 'json',
+      success: function(response, status, xhr) {
+        last_time_categories_donut_chart.setData(response);
+        $('#last-time-categories-donut-chart-box .period-name').text($(e.currentTarget).text());
+
+        let whole_amount = response.map(function(item){
+          return item['value'];
+        }).reduce(function(previousValue, currentValue, index, array) {
+          return previousValue + currentValue;
+        });
+        $('#last-time-categories-donut-chart-box .whole_time_amount').text(whole_amount);
+
+        $('#last-time-categories-donut-chart-box').css('opacity', '1');
       }
     });
   });

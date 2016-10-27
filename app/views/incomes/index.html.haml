@@ -1,0 +1,40 @@
+.row
+  .col-lg-12
+    %h2.page-header= t(:incomes)
+.row.hidden-xs
+  .col-lg-12
+    %p.pull-right
+      = link_to new_income_path, class: 'btn btn-success' do
+        %i.fa.fa-plus
+        = t(:add_new_income)
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading= t(:incomes_list)
+      .panel-body
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th= t(:name)
+                %th= t(:amount)
+                %th= t(:description)
+                %th= t(:got_on)
+                %th= t(:user)
+                %th= t(:actions)
+            %tbody
+              - @incomes.each do |income|
+                %tr
+                  %td= income.name
+                  %td= income.amount
+                  %td= income.description
+                  %td= l(income.got_on)
+                  %td= income.user.try(:username)
+                  %td
+                    = link_to edit_income_path(income), title: t(:edit) do
+                      %i.fa.fa-pencil.fa-fw
+                    = link_to income, method: :delete, title: t(:destroy), data: { confirm: t(:a_u_sure) } do
+                      %i.fa.fa-trash-o.fa-fw
+
+  .col-lg-12
+    = paginate @incomes

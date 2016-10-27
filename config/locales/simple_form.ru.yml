@@ -35,6 +35,11 @@ ru:
         amount: 'Сумма'
         currency: 'Валюта'
         description: 'Описание'
+      income:
+        name: 'Название'
+        amount: 'Сумма'
+        description: 'Описание'
+        got_on: 'Получено'
     placeholders:
       cost:
         name: 'Введите название расхода'
@@ -48,6 +53,10 @@ ru:
         name: 'Введите название денежнего средства'
         amount: 'Введите сумму денежнего средства'
         description: 'Введите описание денежнего средства'
+      income:
+        name: 'Введите название поступления'
+        amount: 'Введите сумму поступления'
+        description: 'Введите описание постуления'
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'

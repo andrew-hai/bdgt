@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727151616) do
+ActiveRecord::Schema.define(version: 20161027152713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,10 +32,9 @@ ActiveRecord::Schema.define(version: 20160727151616) do
     t.integer  "cost_category_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["cost_category_id"], name: "index_costs_on_cost_category_id", using: :btree
+    t.index ["user_id"], name: "index_costs_on_user_id", using: :btree
   end
-
-  add_index "costs", ["cost_category_id"], name: "index_costs_on_cost_category_id", using: :btree
-  add_index "costs", ["user_id"], name: "index_costs_on_user_id", using: :btree
 
   create_table "fund_changes", force: :cascade do |t|
     t.integer  "amount"
@@ -46,9 +44,8 @@ ActiveRecord::Schema.define(version: 20160727151616) do
     t.datetime "updated_at", null: false
     t.integer  "from"
     t.integer  "to"
+    t.index ["fund_id"], name: "index_fund_changes_on_fund_id", using: :btree
   end
-
-  add_index "fund_changes", ["fund_id"], name: "index_fund_changes_on_fund_id", using: :btree
 
   create_table "funds", force: :cascade do |t|
     t.string   "name"
@@ -57,6 +54,17 @@ ActiveRecord::Schema.define(version: 20160727151616) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "amount"
+  end
+
+  create_table "incomes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "amount"
+    t.text     "description"
+    t.date     "got_on"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_incomes_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,9 +76,8 @@ ActiveRecord::Schema.define(version: 20160727151616) do
     t.datetime "remember_created_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

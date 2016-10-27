@@ -17,7 +17,7 @@ class DashboardsController < ApplicationController
   helper_method :js_bar_chart_data
 
   private def js_donut_chart_data
-    @js_donut_chart_data ||= ChartPresenter.donut_data
+    @js_donut_chart_data ||= DonutChartPresenter.category_by_last
   end
   helper_method :js_donut_chart_data
 end
