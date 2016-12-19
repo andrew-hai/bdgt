@@ -11,4 +11,20 @@ class BarChartPresenter
       { category: category.name, month_amount: c_data.try(:month_amount) || 0 }
     end
   end
+
+  def self.incomes_costs_year(params = {})
+    result = []
+
+    11.downto(0) do |i|
+      date = DateTime.current - i.month
+
+      costs = Cost.where(spent_on: date.beginning_of_month..date.end_of_month)
+        .sum(:amount)
+      incomes = Income.where(got_on: date.beginning_of_month..date.end_of_month)
+        .sum(:amount)
+
+      result << { month: I18n.t("months.#{Date::MONTHNAMES[date.month]}"), costs: costs, incomes: incomes }
+    end
+    result
+  end
 end

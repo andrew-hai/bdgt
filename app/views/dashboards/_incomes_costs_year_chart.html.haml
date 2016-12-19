@@ -1,0 +1,17 @@
+.row
+  #incomes-costs-year-chart-box.col-lg-12
+    .panel.panel-default
+      .panel-body
+        #incomes-costs-year-chart
+
+:javascript
+  var incomes_costs_year_chart = Morris.Bar({
+    element: 'incomes-costs-year-chart',
+    data: #{js_bar_incomes_costs.to_json},
+    xkey: 'month',
+    xLabelAngle: 45,
+    ykeys: ['costs', 'incomes'],
+    labels: ['#{t(:spent_on)}', '#{t(:got_on)}'],
+    hideHover: 'auto',
+    resize: true
+  });

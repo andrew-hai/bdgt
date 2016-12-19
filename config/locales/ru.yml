@@ -85,6 +85,7 @@ ru:
   category: 'Категория'
   currency: 'Валюта'
   amount: 'Сумма'
+  got_on: 'Получено'
   spent_on: 'Потрачено'
   created_at: 'Создано'
   user: 'Пользователь'
