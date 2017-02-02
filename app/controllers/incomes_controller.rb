@@ -1,4 +1,5 @@
 class IncomesController < ApplicationController
+  after_action :expire_last_cost_fragments, only: [:create, :update, :destroy]
 
   def index
     @incomes = Income.includes(:user).order('id DESC').page(params[:page])
