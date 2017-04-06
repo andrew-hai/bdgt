@@ -101,4 +101,6 @@ ru:
   show_additional_fields: 'Показать дополнительные поля'
   hide_additional_fields: 'Скрыть дополнительные поля'
   incomes_costs_year: 'Соотношение доходов и расходов за год'
-
+  filters: 'Фильтры'
+  to_filter: 'Фильтровать'
+  reset: 'Сбросить'

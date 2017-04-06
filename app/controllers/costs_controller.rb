@@ -4,7 +4,7 @@ class CostsController < ApplicationController
   # GET /costs
   # GET /costs.json
   def index
-    @costs = Cost.includes(:user).order('id DESC').page(params[:page])
+    @costs = CostQuery.perform(params)
   end
 
   # GET /costs/new
@@ -56,20 +56,20 @@ class CostsController < ApplicationController
     end
   end
 
-  private
-    def cost
-      @cost ||= Cost.find(params[:id])
-    end
-    helper_method :cost
+  
+  private def cost
+    @cost ||= Cost.find(params[:id])
+  end
+  helper_method :cost
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def cost_params
-      params.require(:cost).permit(
-        :cost_category_id,
-        :name,
-        :amount,
-        :description,
-        :spent_on
-      )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  private def cost_params
+    params.require(:cost).permit(
+      :cost_category_id,
+      :name,
+      :amount,
+      :description,
+      :spent_on
+    )
+  end
 end

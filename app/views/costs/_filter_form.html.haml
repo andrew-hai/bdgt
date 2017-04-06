@@ -1,0 +1,19 @@
+.panel.panel-info
+  .panel-heading= t(:filters)
+  .panel-body
+    = simple_form_for :cost, method: :get, defaults: { input_html: { class: 'form-control' } } do |f|
+      .row
+        .col-lg-6
+          %fieldset
+            = f.input :name, required: false, input_html: { value: params[:cost].try(:[], :name) }
+            = f.input :cost_category_id,
+              collection: cost_categories,
+              prompt: :translate,
+              required: false,
+              selected: params[:cost].try(:[], :cost_category_id)
+            = f.input :amount, required: false, input_html: { value: params[:cost].try(:[], :amount) }
+          .actions
+            = f.submit t(:to_filter), class: 'btn btn-success'
+            = link_to costs_path, class: 'btn btn-warning' do
+              %i.fa.fa-minus
+              = t(:reset)

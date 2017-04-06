@@ -88,3 +88,6 @@ en:
   show_additional_fields: 'Show additional fields'
   hide_additional_fields: 'Hide additional fields'
   incomes_costs_year: 'Incomes/costs year ratio'
+  filters: 'Filters'
+  to_filter: 'Filter'
+  reset: 'Reset'
