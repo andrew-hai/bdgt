@@ -4,7 +4,7 @@ class CostsController < ApplicationController
   # GET /costs
   # GET /costs.json
   def index
-    @costs = CostQuery.perform(params)
+    @cost_query = CostQuery.perform(params)
   end
 
   # GET /costs/new

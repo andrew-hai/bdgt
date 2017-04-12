@@ -90,4 +90,8 @@ en:
   incomes_costs_year: 'Incomes/costs year ratio'
   filters: 'Filters'
   to_filter: 'Filter'
+  show_filters: 'Show filters'
+  hide_filters: 'Hide filters'
   reset: 'Reset'
+  filters_sum_amount: 'Summary amount: <b>%{sum_amount}</b>'
+  filters_total_count: 'Total count: <b>%{total_count}</b>'

@@ -1,19 +1,42 @@
 .panel.panel-info
-  .panel-heading= t(:filters)
+  .panel-heading
+    = t(:filters)
   .panel-body
-    = simple_form_for :cost, method: :get, defaults: { input_html: { class: 'form-control' } } do |f|
+    = simple_form_for cost_query, as: :cost, method: :get, url: costs_path, defaults: { input_html: { class: 'form-control' }, required: false } do |f|
       .row
-        .col-lg-6
-          %fieldset
-            = f.input :name, required: false, input_html: { value: params[:cost].try(:[], :name) }
-            = f.input :cost_category_id,
-              collection: cost_categories,
-              prompt: :translate,
-              required: false,
-              selected: params[:cost].try(:[], :cost_category_id)
-            = f.input :amount, required: false, input_html: { value: params[:cost].try(:[], :amount) }
-          .actions
-            = f.submit t(:to_filter), class: 'btn btn-success'
-            = link_to costs_path, class: 'btn btn-warning' do
-              %i.fa.fa-minus
-              = t(:reset)
+        .col-lg-6.slide-toggle-box
+          .toggle-action.show{ class: "#{cost_query.any_filter? ? 'hidden' : ''}"}
+            %button.btn.btn-default
+              %i.fa.fa-bar-chart-o.fa-fw
+              = t(:show_filters)
+          .toggle-content{ class: "#{cost_query.any_filter? ? '' : 'hidden'}"}
+            - if cost_query.any_filter?
+              .alert.alert-success
+                = t(:filters_total_count, total_count: cost_query.total_count).html_safe
+                %br
+                = t(:filters_sum_amount, sum_amount: cost_query.sum_amount).html_safe
+            %fieldset
+              = f.input :name
+              = f.input :cost_category_id,
+                collection: cost_categories,
+                prompt: :translate
+              = f.input :amount_from, as: :integer
+              = f.input :amount_to, as: :integer
+              = f.input :spent_on_from, as: :date, html5: true
+              = f.input :spent_on_to, as: :date, html5: true
+            .actions
+              = f.submit t(:to_filter), class: 'btn btn-success'
+              = link_to costs_path, class: 'btn btn-warning' do
+                %i.fa.fa-minus
+                = t(:reset)
+              %span.toggle-action
+                %button.btn.btn-default
+                  %i.fa.fa-bar-chart-o.fa-fw
+                  = t(:hide_filters)
+
+:javascript
+  $('.slide-toggle-box .toggle-action').on('click', function(e) {
+    e.preventDefault();
+    var box = $(e.currentTarget).parents('.slide-toggle-box');
+    box.find('.toggle-content, .toggle-action.show').toggleClass('hidden');
+  });

@@ -103,4 +103,8 @@ ru:
   incomes_costs_year: 'Соотношение доходов и расходов за год'
   filters: 'Фильтры'
   to_filter: 'Фильтровать'
+  show_filters: 'Показать фильтры'
+  hide_filters: 'Скрыть фильтры'
   reset: 'Сбросить'
+  filters_sum_amount: 'Общая сумма расходов: <b>%{sum_amount}</b>'
+  filters_total_count: 'Общее количество расходов: <b>%{total_count}</b>'

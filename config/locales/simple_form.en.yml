@@ -24,8 +24,12 @@ en:
         name: 'Name'
         cost_category_id: 'Cost category'
         amount: 'Amount'
+        amount_from: 'Amount bigger then'
+        amount_to: 'Amount less then'
         description: 'Description'
         spent_on: 'Spent on'
+        spent_on_from: 'Spent after'
+        spent_on_to: 'Spent before'
       cost_category:
         name: 'Name'
         month_limit: 'Month limit'
@@ -44,7 +48,11 @@ en:
       cost:
         name: 'Cost name'
         amount: 'Cost amount'
+        amount_from: 'Amount bigger then'
+        amount_to: 'Amount less then'
         description: 'Cost description'
+        spent_on_from: 'Spent after'
+        spent_on_to: 'Spent before'
       cost_category:
         name: 'Cost category name'
         month_limit: 'Cost category month limit'

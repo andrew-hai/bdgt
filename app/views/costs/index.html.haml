@@ -9,7 +9,7 @@
         = t(:add_new_cost)
 .row
   .col-lg-12
-    = render 'filter_form'
+    = render 'filter_form', cost_query: @cost_query
 
     .panel.panel-default
       .panel-heading= t(:costs_list)
@@ -26,7 +26,7 @@
                 %th= t(:user)
                 %th= t(:actions)
             %tbody
-              - @costs.each do |cost|
+              - @cost_query.results.each do |cost|
                 %tr
                   %td= cost.name
                   %td= cost.cost_category.name
@@ -41,4 +41,4 @@
                       %i.fa.fa-trash-o.fa-fw
 
   .col-lg-12
-    = paginate @costs
+    = paginate @cost_query.results
