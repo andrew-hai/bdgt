@@ -29,7 +29,7 @@ ru:
         description: 'Описание'
         spent_on: 'Потрачено'
         spent_on_from: 'Потрачено после'
-        spent_on_to: 'Потрачено после'
+        spent_on_to: 'Потрачено до'
       cost_category:
         name: 'Название'
         month_limit: 'Месячный лимит'

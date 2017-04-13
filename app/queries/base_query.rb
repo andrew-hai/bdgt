@@ -11,22 +11,15 @@ class BaseQuery
         filters.each do |key, options|
           filter_value = query.public_send("#{key}=", params.dig(params_group, key))
           if filter_value.present?
-            case options[:query_type]
-            when :full_like
-              scope = scope.where("#{key} LIKE(:value)", value: "%#{filter_value}%")
-            when :gth
-              scope = scope.where("#{key.to_s.gsub('_from', '')} >= :value", value: filter_value)
-            when :lth
-              scope = scope.where("#{key.to_s.gsub('_to', '')} <= :value", value: filter_value)
-            else
-              scope = scope.where(key => filter_value)
-            end
+            query_field = key.to_s.gsub(/_from\z/, '').gsub(/_to\z/, '')
+            scope = scope.where(
+              query_string(options[:query_type], query_field),
+              value: query_value(options[:query_type], filter_value)
+            )
           end
         end
 
-        if query.any_filter?
-          query.sum_amount = scope.sum(:amount)
-        end
+        query.sum_amount = scope.sum(:amount) if query.any_filter?
 
         query.results = scope.page(params[:page])
       end
@@ -34,6 +27,21 @@ class BaseQuery
 
     def filters
       @filters ||= {}
+    end
+
+    private def query_string(query_type, query_field)
+      case query_type
+      when :full_like then "#{query_field} LIKE(:value)"
+      when :'=', :'<=', :'>=' then "#{query_field} #{query_type} :value"
+      else "#{query_field} = :value"
+      end
+    end
+
+    private def query_value(query_type, filter_value)
+      case query_type
+      when :full_like then "%#{filter_value}%"
+      else filter_value
+      end
     end
 
     private def base_scope(scope)
@@ -51,6 +59,6 @@ class BaseQuery
   end
 
   def any_filter?
-    self.class.filters.keys.map{ |key| public_send(key) }.any?{ |f| f.present? }
+    self.class.filters.keys.map{ |key| public_send(key) }.any?{ |filter| filter.present? }
   end
 end

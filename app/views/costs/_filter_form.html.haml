@@ -22,8 +22,8 @@
                 prompt: :translate
               = f.input :amount_from, as: :integer
               = f.input :amount_to, as: :integer
-              = f.input :spent_on_from, as: :date, html5: true
-              = f.input :spent_on_to, as: :date, html5: true
+              = f.input :spent_on_from, as: :date, html5: true, input_html: { value: cost_query.spent_on_from }
+              = f.input :spent_on_to, as: :date, html5: true, input_html: { value: cost_query.spent_on_to }
             .actions
               = f.submit t(:to_filter), class: 'btn btn-success'
               = link_to costs_path, class: 'btn btn-warning' do
