@@ -21,6 +21,6 @@
  *= require metisMenu/dist/metisMenu.min
  *= require morrisjs/morris
  *
- *= require_tree .
+ * require_tree .
  *= require_self
  */

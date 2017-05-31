@@ -29,4 +29,4 @@
 //= require morrisjs/morris.min
 //= require raphael/raphael.min
 
-//= require_tree .
+// require_tree .

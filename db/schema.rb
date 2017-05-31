@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027152713) do
+ActiveRecord::Schema.define(version: 20170426122427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,27 @@ ActiveRecord::Schema.define(version: 20161027152713) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "video_files", force: :cascade do |t|
+    t.string   "title",                  null: false
+    t.string   "url",                    null: false
+    t.integer  "video_id"
+    t.integer  "season",     default: 1, null: false
+    t.integer  "episod",     default: 1, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["video_id"], name: "index_video_files_on_video_id", using: :btree
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.string   "title",                   null: false
+    t.string   "url",                     null: false
+    t.text     "description",             null: false
+    t.integer  "last_season", default: 1, null: false
+    t.integer  "last_episod", default: 1, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
 end

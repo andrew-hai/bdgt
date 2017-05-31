@@ -35,7 +35,7 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
-set :rvm_ruby_version, '2.3.1@bdgt_rails5'
+set :rvm_ruby_version, '2.4.0@bdgt'
 
 set :unicorn_pid, "#{deploy_to}/shared/unicorn.pid"
 

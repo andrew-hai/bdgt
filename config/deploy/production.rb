@@ -61,7 +61,7 @@
 #   }
 set :rails_env, 'production'
 
-server 'videolist.com.ua',
+server '46.101.232.51',
   user: 'andrew',
   roles: %w{web app db},
   ssh_options: {
