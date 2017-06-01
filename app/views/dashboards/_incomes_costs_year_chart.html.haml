@@ -10,7 +10,7 @@
 :javascript
   var incomes_costs_year_chart = Morris.Bar({
     element: 'incomes-costs-year-chart',
-    data: #{js_bar_incomes_costs.to_json},
+    data: #{js_bar_incomes_costs.to_json.html_safe},
     xkey: 'month',
     xLabelAngle: 45,
     ykeys: ['costs', 'incomes'],

@@ -22,10 +22,10 @@
 :javascript
   var last_days_costs_area_chart = Morris.Area({
     element: 'last-days-costs-area-chart',
-    data: #{js_area_chart_data.to_json},
+    data: #{js_area_chart_data.to_json.html_safe},
     xkey: 'spent_on',
-    ykeys: #{cost_categories.map { |c| "category_#{c.id}" }.to_json},
-    labels: #{cost_categories.map(&:name).to_json},
+    ykeys: #{cost_categories.map { |c| "category_#{c.id}" }.to_json.html_safe},
+    labels: #{cost_categories.map(&:name).to_json.html_safe},
     pointSize: 2,
     hideHover: 'auto',
     resize: true,

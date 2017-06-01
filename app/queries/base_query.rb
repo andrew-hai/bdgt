@@ -21,7 +21,7 @@ class BaseQuery
 
         query.sum_amount = scope.sum(:amount) if query.any_filter?
 
-        query.results = scope.page(params[:page])
+        query.results = scope.per_page_kaminari(params[:page])
       end
     end
 

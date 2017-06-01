@@ -5,7 +5,7 @@ class FundsController < ApplicationController
   # GET /funds.json
   def index
     @funds = Fund.all
-    @fund_changes = FundChange.includes(:fund).order('id DESC').page(params[:page])
+    @fund_changes = FundChange.includes(:fund).order('id DESC').per_page_kaminari(params[:page])
   end
 
   # GET /funds/new

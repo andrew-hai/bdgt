@@ -61,7 +61,7 @@
 :javascript
   var month_categories_bar_chart = Morris.Bar({
     element: 'month-categories-bar-chart',
-    data: #{js_bar_chart_data.to_json},
+    data: #{js_bar_chart_data.to_json.html_safe},
     xkey: 'category',
     xLabelAngle: 45,
     ykeys: ['month_amount'],
@@ -72,7 +72,7 @@
 
   var last_time_categories_donut_chart = Morris.Donut({
     element: 'last-time-categories-donut-chart',
-    data: #{js_donut_chart_data.to_json},
+    data: #{js_donut_chart_data.to_json.html_safe},
     resize: true
   });
 
