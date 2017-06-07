@@ -108,3 +108,4 @@ ru:
   reset: 'Сбросить'
   filters_sum_amount: 'Общая сумма расходов: <b>%{sum_amount}</b>'
   filters_total_count: 'Общее количество расходов: <b>%{total_count}</b>'
+  fetch: 'Обновить данные'

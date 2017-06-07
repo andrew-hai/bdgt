@@ -95,3 +95,4 @@ en:
   reset: 'Reset'
   filters_sum_amount: 'Summary amount: <b>%{sum_amount}</b>'
   filters_total_count: 'Total count: <b>%{total_count}</b>'
+  fetch: 'Fetch'
