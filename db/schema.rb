@@ -10,95 +10,99 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426122427) do
+ActiveRecord::Schema.define(version: 20170607162157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cost_categories", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "month_limit", default: 2000
-  end
-
-  create_table "costs", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "amount"
-    t.text     "description"
-    t.date     "spent_on"
-    t.integer  "user_id"
-    t.integer  "cost_category_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["cost_category_id"], name: "index_costs_on_cost_category_id", using: :btree
-    t.index ["user_id"], name: "index_costs_on_user_id", using: :btree
-  end
-
-  create_table "fund_changes", force: :cascade do |t|
-    t.integer  "amount"
-    t.integer  "fc_type"
-    t.integer  "fund_id"
+  create_table "cost_categories", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "from"
-    t.integer  "to"
-    t.index ["fund_id"], name: "index_fund_changes_on_fund_id", using: :btree
+    t.integer "month_limit", default: 2000
   end
 
-  create_table "funds", force: :cascade do |t|
-    t.string   "name"
-    t.string   "currency"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "amount"
+  create_table "costs", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.integer "amount"
+    t.text "description"
+    t.date "spent_on"
+    t.integer "user_id"
+    t.integer "cost_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cost_category_id"], name: "index_costs_on_cost_category_id"
+    t.index ["user_id"], name: "index_costs_on_user_id"
   end
 
-  create_table "incomes", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "amount"
-    t.text     "description"
-    t.date     "got_on"
-    t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["user_id"], name: "index_incomes_on_user_id", using: :btree
+  create_table "fund_changes", id: :serial, force: :cascade do |t|
+    t.integer "amount"
+    t.integer "fc_type"
+    t.integer "fund_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "from"
+    t.integer "to"
+    t.index ["fund_id"], name: "index_fund_changes_on_fund_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "username",               default: "", null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "funds", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "currency"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "amount"
+  end
+
+  create_table "incomes", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.integer "amount"
+    t.text "description"
+    t.date "got_on"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_incomes_on_user_id"
+  end
+
+  create_table "secure_marks", force: :cascade do |t|
+    t.string "seasonvar_value"
+  end
+
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "username", default: "", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "video_files", force: :cascade do |t|
-    t.string   "title",                  null: false
-    t.string   "url",                    null: false
-    t.integer  "video_id"
-    t.integer  "season",     default: 1, null: false
-    t.integer  "episod",     default: 1, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.index ["video_id"], name: "index_video_files_on_video_id", using: :btree
+  create_table "video_files", id: :serial, force: :cascade do |t|
+    t.string "title", null: false
+    t.string "url", null: false
+    t.integer "video_id"
+    t.integer "season", default: 1, null: false
+    t.integer "episod", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["video_id"], name: "index_video_files_on_video_id"
   end
 
-  create_table "videos", force: :cascade do |t|
-    t.string   "title",                   null: false
-    t.string   "url",                     null: false
-    t.text     "description",             null: false
-    t.integer  "last_season", default: 1, null: false
-    t.integer  "last_episod", default: 1, null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+  create_table "videos", id: :serial, force: :cascade do |t|
+    t.string "title", null: false
+    t.string "url", null: false
+    t.text "description", null: false
+    t.integer "last_season", default: 1, null: false
+    t.integer "last_episod", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

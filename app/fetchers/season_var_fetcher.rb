@@ -6,6 +6,7 @@
 # "      'secureMark': '36e598555d6beb9610e51b9e3261399b',\n" +
 # "      'time': 1496765882\n" +
 # "    }\n" +
+# work secureMark': '36e598555d6beb9610e51b9e3261399b
 
 class SeasonVarFetcher
   attr_reader :video
@@ -49,7 +50,6 @@ class SeasonVarFetcher
 
   def season_playlist(serial_id, secure_mark)
     pl_url = "http://seasonvar.ru/playls2/#{secure_mark}0/trans/#{serial_id}/list.xml"
-    binding.pry
     JSON.parse(HTTParty.get(pl_url).body)['playlist']
   end
 end

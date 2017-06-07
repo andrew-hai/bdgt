@@ -1,0 +1,2 @@
+class SecureMark < ApplicationRecord
+end

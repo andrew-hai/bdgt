@@ -23,7 +23,7 @@ class VideoPresenter
       video_files(video).as_json(only: [:id, :title, :url]).map do |f|
         f.merge(
           action: :play,
-          video_file_url: f['url'],
+          video_file_url: f['url'].gsub(/fi2lm\/.*\//, "fi2lm/#{SecureMark.first.seasonvar_value}/"),
           label: f['title'],
           name: "video_file_#{f['id']}",
           thumb: image_url('videolist.jpg')
