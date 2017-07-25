@@ -57,10 +57,6 @@ ActiveAdmin.register Video do
     end
   end
 
-  # action_item :fetch, only: :show do
-  #   link_to I18n.t(:fetch), fetch_admin_video_path(video)
-  # end
-
   member_action :fetch, method: :get do
     SeasonVarFetcher.new(resource).execute
 

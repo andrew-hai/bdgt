@@ -5,9 +5,7 @@ module Kodi::V1
     end
 
     def search
-      videos = Video.where('id > 0')
-
-      render json: presenter.transform_all(videos)
+      render json: presenter.transform_all(Video.where('id > 0'))
     end
 
     def show

@@ -20,21 +20,25 @@ class SeasonVarFetcher
 
     seasons_urls.each_with_index do |season_url, i|
       video.last_season = i + 1
-      serial_id = season_url.match(/serial-(\d*)-/)[1]
 
-      season_page = HTTParty.get(season_url).body
-      secure_mark = season_page.match(/'secureMark': '([0-9a-z]*)'/)[1]
+      begin
+        serial_id = season_url.match(/serial-(\d*)-/)[1]
+        season_page = HTTParty.get(season_url).body
+        secure_mark = season_page.match(/'secureMark': '([0-9a-z]*)'/)[1]
 
-      playlist = season_playlist(serial_id, secure_mark)
-      playlist.each_with_index do |episod, j|
-        video.last_episod = j + 1
+        playlist = season_playlist(serial_id, secure_mark)
+        playlist.each_with_index do |episod, j|
+          video.last_episod = j + 1
 
-        video.video_files.create(
-          title: episod['comment'],
-          url: episod['file'],
-          season: video.last_season,
-          episod: video.last_episod
-        )
+          video.video_files.create(
+            title: episod['comment'],
+            url: episod['file'],
+            season: video.last_season,
+            episod: video.last_episod
+          )
+        end
+      rescue => error
+        # Some logger
       end
     end
 
