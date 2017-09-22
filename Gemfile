@@ -45,6 +45,8 @@ gem 'activeadmin'
 
 gem 'httparty'
 
+gem 'paperclip', '~> 5.0.0'
+
 # Use Unicorn as the app server
 group :production do
   gem 'unicorn'

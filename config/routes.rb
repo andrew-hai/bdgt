@@ -30,5 +30,11 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :react do
+    namespace :v1 do
+      resources :audios, only: [:index]
+    end
+  end
+
   ActiveAdmin.routes(self)
 end
