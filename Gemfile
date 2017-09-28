@@ -48,9 +48,9 @@ gem 'httparty'
 gem 'paperclip', '~> 5.0.0'
 
 # Use Unicorn as the app server
-group :production do
-  gem 'unicorn'
-end
+# group :production do
+#   gem 'unicorn'
+# end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -68,7 +68,8 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
-  gem 'capistrano3-unicorn', require: false
+  # gem 'capistrano3-unicorn', require: false
+  gem 'capistrano3-puma',   require: false
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'

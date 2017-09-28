@@ -28,6 +28,7 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push('log')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -35,14 +36,40 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
-set :rvm_ruby_version, '2.4.0@bdgt'
+set :rvm_ruby_version, '2.4.2@bdgt'
 
-set :unicorn_pid, "#{deploy_to}/shared/unicorn.pid"
+# Unicorn
+# set :unicorn_pid, "#{deploy_to}/shared/unicorn.pid"
+
+# Puma
+set :puma_threads,    [4, 16]
+set :puma_workers,    0
+set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
+set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
+set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+set :puma_access_log, "#{release_path}/log/puma.error.log"
+set :puma_error_log,  "#{release_path}/log/puma.access.log"
+set :puma_preload_app, true
+set :puma_worker_timeout, nil
+set :puma_init_active_record, true  # Change to false when not using ActiveRecord
+
 
 after 'deploy', 'deploy:migrate'
 
 after 'deploy:publishing', 'deploy:fonts'
 after 'deploy:publishing', 'deploy:restart'
+
+namespace :puma do
+  desc 'Create Directories for Puma Pids and Socket'
+  task :make_dirs do
+    on roles(:app) do
+      execute "mkdir #{shared_path}/tmp/sockets -p"
+      execute "mkdir #{shared_path}/tmp/pids -p"
+    end
+  end
+
+  before :start, :make_dirs
+end
 
 namespace :deploy do
   task :fonts do
@@ -51,10 +78,27 @@ namespace :deploy do
     end
   end
 
-  task :restart do
-    invoke 'unicorn:restart'
+  # task :restart do
+  #   invoke 'unicorn:restart'
+  # end
+
+  desc 'Initial Deploy'
+  task :initial do
+    on roles(:app) do
+      before 'deploy:restart', 'puma:start'
+      invoke 'deploy'
+    end
   end
 
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'puma:restart'
+    end
+  end
+
+  after :finishing, :cleanup
+  after :finishing, :restart
   after :restart, :clear_tmp do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -64,15 +108,3 @@ namespace :deploy do
     end
   end
 end
-
-# namespace :deploy do
-
-#   after :restart, :clear_cache do
-#     on roles(:web), in: :groups, limit: 3, wait: 10 do
-#       # Here we can do anything such as:
-#       # within release_path do
-#       #   execute :rake, 'cache:clear'
-#       # end
-#     end
-#   end
-# end

@@ -41,6 +41,7 @@ export default class Player extends React.Component {
   }
 
   playMusic = () => {
+    console.log(this.state)
     this.state.audio.play();
     this.setState({playing: true});
   }
