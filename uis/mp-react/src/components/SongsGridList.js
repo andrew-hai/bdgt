@@ -2,9 +2,6 @@ import React from 'react';
 
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import {
-  fetchSongs
-} from '../actions/index'
 
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
@@ -28,13 +25,8 @@ const styles = {
 };
 
 class SongsGridList extends React.Component {
-  componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(fetchSongs())
-  }
-
   render() {
-    const { songs } = this.props
+    const { songs } = this.props;
     return (
       <div style={styles.root}>
         <GridList
@@ -45,12 +37,12 @@ class SongsGridList extends React.Component {
           <Subheader>Playlist</Subheader>
           {songs.map((tile) => (
             <GridTile
-              key={tile.key}
-              title={tile.name}
-              subtitle={<span>by <b>{tile.author}</b></span>}
+              key={tile.id}
+              title={tile.title}
+              subtitle={<span>by <b>{tile.artist}</b></span>}
               actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
             >
-              <img src={tile.img} alt={tile.name} />
+              <img src={tile.img} alt={tile.title} />
             </GridTile>
           ))}
         </GridList>
@@ -59,14 +51,16 @@ class SongsGridList extends React.Component {
   }
 }
 
+SongsGridList.defaultProps = {
+  songs: []
+};
+
 SongsGridList.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  songs: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired
+  songs: PropTypes.array.isRequired
 }
 
 function mapStateToProps(state) {
-  return state.songsLoad
+  return state.allSongs;
 }
 
 export default connect(mapStateToProps)(SongsGridList)

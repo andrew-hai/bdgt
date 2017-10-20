@@ -16,8 +16,15 @@ ActiveRecord::Schema.define(version: 20170803153058) do
   enable_extension "plpgsql"
 
   create_table "audios", force: :cascade do |t|
-    t.string "name"
-    t.string "author"
+    t.string "artist"
+    t.string "title"
+    t.string "album"
+    t.integer "year"
+    t.string "track_number"
+    t.string "genre"
+    t.string "content"
+    t.string "content2"
+    t.string "language"
     t.string "file_file_name"
     t.string "file_content_type"
     t.integer "file_file_size"

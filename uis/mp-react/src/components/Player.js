@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { connect } from 'react-redux'
+
 import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 
@@ -30,20 +32,24 @@ const iconStyle = {
   // height: 28,
 };
 
-export default class Player extends React.Component {
+class Player extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      audio: new Audio('http://localhost:3000/audios/214adca37638f857bf2784577017828ddd45f3a3.mp3?1501775274'),
       playing: false,
-      songName: 'Hello World'
+      songArtist: '...',
+      songTitle: '...',
+      songIndex: 0
     };
   }
 
   playMusic = () => {
-    console.log(this.state)
-    this.state.audio.play();
-    this.setState({playing: true});
+    if (!this.state.audio) {
+      this.skip(0);
+    } else {
+      this.state.audio.play();
+      this.setState({playing: true});
+    }
   }
 
   pauseMusic = () => {
@@ -51,36 +57,57 @@ export default class Player extends React.Component {
     this.setState({playing: false});
   }
 
+  SkipPrevious = () => {
+    this.skip(-1);
+  }
+
   skipNext = () => {
-    this.setState({playing: true});
-    this.setState({ audio: new Audio('http://localhost:3000/audios/890e94b7f4e57cb104794eaa777468ff246af830.mp3?1501776408') }, () => {
-      this.state.audio.play();
-    });
+    this.skip(1);
+  }
+
+  skip = (i) => {
+    if (this.state.audio) {
+      this.state.audio.pause();
+    }
+
+    const nextIndex = this.state.songIndex + i;
+    this.setState(
+      {
+        audio: new Audio(this.props.songs[nextIndex].file_url),
+        playing: true,
+        songArtist: this.props.songs[nextIndex].artist,
+        songTitle: this.props.songs[nextIndex].title,
+        songIndex: nextIndex
+      },
+      () => {
+        this.state.audio.play();
+      }
+    );
   }
 
   render() {
     return (
       <Toolbar>
         <ToolbarGroup firstChild={true}>
+          <IconButton style={iconButtonStyle} onClick={this.SkipPrevious} iconStyle={iconStyle}>
+            <SkipPrevious color="black" />
+          </IconButton>
           {!this.state.playing &&
-            <IconButton style={iconButtonStyle} onTouchTap={this.playMusic} iconStyle={iconStyle}>
+            <IconButton style={iconButtonStyle} onClick={this.playMusic} iconStyle={iconStyle}>
               <PlayArrow color="black" />
             </IconButton>
           }
           {this.state.playing &&
-            <IconButton style={iconButtonStyle} onTouchTap={this.pauseMusic} iconStyle={iconStyle}>
+            <IconButton style={iconButtonStyle} onClick={this.pauseMusic} iconStyle={iconStyle}>
               <Pause color="black" />
             </IconButton>
           }
-          <IconButton style={iconButtonStyle} iconStyle={iconStyle}>
-            <SkipPrevious color="black" />
-          </IconButton>
-          <IconButton style={iconButtonStyle} onTouchTap={this.skipNext} iconStyle={iconStyle}>
+          <IconButton style={iconButtonStyle} onClick={this.skipNext} iconStyle={iconStyle}>
             <SkipNext color="black" />
           </IconButton>
         </ToolbarGroup>
         <ToolbarGroup>
-          <ToolbarTitle text={this.state.songName} />
+          <ToolbarTitle text={this.state.songArtist + ' : ' + this.state.songTitle} />
         </ToolbarGroup>
         <ToolbarGroup>
           <IconButton style={iconButtonStyle} iconStyle={iconStyle}>
@@ -106,3 +133,9 @@ export default class Player extends React.Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return state.allSongs;
+}
+
+export default connect(mapStateToProps)(Player)

@@ -38,9 +38,6 @@ set :keep_releases, 3
 
 set :rvm_ruby_version, '2.4.2@bdgt'
 
-# Unicorn
-# set :unicorn_pid, "#{deploy_to}/shared/unicorn.pid"
-
 # Puma
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
@@ -77,10 +74,6 @@ namespace :deploy do
       execute "ln -s #{release_path}/vendor/assets/bower_components/font-awesome/fonts #{release_path}/public/fonts"
     end
   end
-
-  # task :restart do
-  #   invoke 'unicorn:restart'
-  # end
 
   desc 'Initial Deploy'
   task :initial do

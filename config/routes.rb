@@ -32,7 +32,9 @@ Rails.application.routes.draw do
 
   namespace :react do
     namespace :v1 do
-      resources :audios, only: [:index]
+      resources :audios, only: [:index] do
+        get :seed, on: :collection
+      end
     end
   end
 

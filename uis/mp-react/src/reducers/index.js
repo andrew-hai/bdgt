@@ -4,7 +4,7 @@ import {
   RECEIVE_SONGS
 } from '../actions/index'
 
-function songsLoad(state = {}, action) {
+function allSongs(state = {}, action) {
   switch (action.type) {
     case RECEIVE_SONGS:
     case REQUEST_SONGS:
@@ -18,7 +18,7 @@ function songsLoad(state = {}, action) {
 }
 
 const rootReducer = combineReducers({
-  songsLoad
+  allSongs
 })
 
 export default rootReducer

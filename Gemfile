@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.1'
+gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 gem 'pg'
@@ -47,13 +47,7 @@ gem 'httparty'
 
 gem 'paperclip', '~> 5.0.0'
 
-# Use Unicorn as the app server
-# group :production do
-#   gem 'unicorn'
-# end
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'id3tag'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -68,7 +62,6 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
-  # gem 'capistrano3-unicorn', require: false
   gem 'capistrano3-puma',   require: false
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
