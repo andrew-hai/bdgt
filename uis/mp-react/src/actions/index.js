@@ -22,7 +22,7 @@ function receiveSongs(json) {
 export function fetchSongs() {
   return dispatch => {
     dispatch(requestSongs())
-    return fetch(`http://localhost:3300/react/v1/audios`)
+    return fetch(`http://videolist.com.ua/react/v1/audios`)
       .then(response => response.json())
       .then(json => dispatch(receiveSongs(json)))
   }
