@@ -6,7 +6,12 @@ import { connect } from 'react-redux'
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+// import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import PlayArrow from 'material-ui/svg-icons/av/play-arrow';
+
+import {
+  playAudio
+} from '../actions/index'
 
 const styles = {
   root: {
@@ -25,8 +30,17 @@ const styles = {
 };
 
 class SongsGridList extends React.Component {
+  play = (id) => {
+    const { dispatch, audios } = this.props;
+    const audioToPlay = audios.find(a => a.id === id);
+    const index = audios.indexOf(audioToPlay);
+    if (!!audioToPlay) {
+      dispatch(playAudio(audioToPlay, index));
+    }
+  }
+
   render() {
-    const { songs } = this.props;
+    const { audios } = this.props;
     return (
       <div style={styles.root}>
         <GridList
@@ -35,12 +49,14 @@ class SongsGridList extends React.Component {
           style={styles.gridList}
         >
           <Subheader>Playlist</Subheader>
-          {songs.map((tile) => (
+          {audios.map((tile) => (
             <GridTile
               key={tile.id}
               title={tile.title}
               subtitle={<span>by <b>{tile.artist}</b></span>}
-              actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+              actionIcon={<IconButton>
+                <PlayArrow color="white" onClick={() => this.play(tile.id)} /></IconButton>
+              }
             >
               <img src={tile.img} alt={tile.title} />
             </GridTile>
@@ -52,15 +68,15 @@ class SongsGridList extends React.Component {
 }
 
 SongsGridList.defaultProps = {
-  songs: []
+  audios: []
 };
 
 SongsGridList.propTypes = {
-  songs: PropTypes.array.isRequired
+  audios: PropTypes.array.isRequired
 }
 
 function mapStateToProps(state) {
-  return state.allSongs;
+  return state.allAudios;
 }
 
 export default connect(mapStateToProps)(SongsGridList)

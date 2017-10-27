@@ -5,11 +5,9 @@ class CreateAudios < ActiveRecord::Migration[5.1]
       t.string :title
       t.string :album
       t.integer :year
-      t.string :track_number
+      t.integer :track_number
       t.string :genre
-      t.string :content
-      t.string :content2
-      t.string :language
+      t.integer :duration
       t.attachment :file
 
       t.timestamps null: false

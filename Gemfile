@@ -49,10 +49,11 @@ gem 'paperclip', '~> 5.0.0'
 
 gem 'id3tag'
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
+# Taglib-ruby depends on `sudo apt-get install libtag1-dev`
+# Home page http://robinst.github.io/taglib-ruby/
+gem 'taglib-ruby'
 
+group :development, :test do
   gem 'pry'
   gem 'pry-rails'
 end

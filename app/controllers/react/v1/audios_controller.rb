@@ -1,3 +1,5 @@
+require 'taglib'
+
 module React::V1
   class AudiosController < React::ApplicationController
     before_action do
@@ -8,35 +10,41 @@ module React::V1
     end
 
     def index
-      a = Audio.order(title: :asc).all.as_json(methods: [:file_url])
-        .each { |o| o.merge!(img: 'http://www.material-ui.com/images/grid-list/00-52-29-429_640.jpg') }
-
-      render json: a
+      # render json: Audio.order(artist: :asc, title: :asc).all.as_json
+      render json: Audio.order('RANDOM ()').all.as_json
     end
 
     def seed
+      Audio.destroy_all
+
       mp3s = Dir.entries("#{Rails.root}/public/media").select { |filename| filename =~ /\.mp3/i }
 
       mp3s.each do |file|
-        ID3Tag.read(File.open("#{Rails.root}/public/media/#{file}", 'rb')) do |tag|
-          
-          a = Audio.create(
+        id_3_tag = ID3Tag.read(File.open("#{Rails.root}/public/media/#{file}", 'rb'))        
+        TagLib::FileRef.open("#{Rails.root}/public/media/#{file}") do |fileref|
+
+          Audio.create(
             file: File.open("#{Rails.root}/public/media/#{file}"),
-            artist: tag.artist,
-            title: tag.title,
-            album: tag.album,
-            year: tag.year,
-            track_number: tag.track_nr,
-            genre: tag.genre,
-            content: tag.get_frame(:TIT2).content,
-            content2: tag.get_frames(:COMM).first.try(:content),
-            language: tag.get_frames(:COMM).last.try(:language)
+            artist: combined_value(id_3_tag.artist, fileref.tag.artist),
+            title: combined_value(id_3_tag.title, fileref.tag.title),
+            album: combined_value(id_3_tag.album, fileref.tag.album),
+            year: combined_value(id_3_tag.year, fileref.tag.year),
+            track_number: combined_value(id_3_tag.track_nr.to_i, fileref.tag.track.to_i),
+            genre: combined_value(id_3_tag.genre, fileref.tag.genre),
+            duration: fileref.audio_properties.length
           )
-          binding.pry
         end
       end
 
       render json: true
+    end
+
+    private def combined_value(val1, val2)
+      if val1.present? && val2.present? && val1 != val2
+        "#{val1}, #{val2}"
+      else
+        val1.presence || val2
+      end
     end
   end
 end

@@ -7,13 +7,13 @@ import SongsGridList from '../components/SongsGridList'
 
 import { connect } from 'react-redux'
 import {
-  fetchSongs
+  fetchAudios
 } from '../actions/index'
 
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchSongs());
+    dispatch(fetchAudios());
   }
 
   render() {

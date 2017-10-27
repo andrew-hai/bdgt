@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types'
+
 import { connect } from 'react-redux'
 
 import RaisedButton from 'material-ui/RaisedButton';
@@ -21,6 +23,12 @@ import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-mo
 import MenuItem from 'material-ui/MenuItem';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
+import {
+  play,
+  pause,
+  playAudio
+} from '../actions/index'
+
 const iconButtonStyle = {
   // width: 48,
   // height: 48,
@@ -33,72 +41,53 @@ const iconStyle = {
 };
 
 class Player extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      playing: false,
-      songArtist: '...',
-      songTitle: '...',
-      songIndex: 0
-    };
-  }
-
-  playMusic = () => {
-    if (!this.state.audio) {
-      this.skip(0);
-    } else {
-      this.state.audio.play();
-      this.setState({playing: true});
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.currentAudio.audio.audioDom) {
+      this.props.currentAudio.audio.audioDom.addEventListener('ended', this.skipNext);
     }
   }
 
-  pauseMusic = () => {
-    this.state.audio.pause();
-    this.setState({playing: false});
+  play = () => {
+    const { dispatch } = this.props;
+    dispatch(play());
+  }
+
+  pause = () => {
+    const { dispatch } = this.props;
+    dispatch(pause());
   }
 
   SkipPrevious = () => {
-    this.skip(-1);
+    const { dispatch, currentAudio, allAudios } = this.props;
+    const audioToPlay = allAudios.audios[currentAudio.audio.index - 1];
+    if (!!audioToPlay) {
+      dispatch(playAudio(audioToPlay, currentAudio.audio.index - 1));
+    }
   }
 
   skipNext = () => {
-    this.skip(1);
-  }
-
-  skip = (i) => {
-    if (this.state.audio) {
-      this.state.audio.pause();
+    const { dispatch, currentAudio, allAudios } = this.props;
+    const audioToPlay = allAudios.audios[currentAudio.audio.index + 1];
+    if (!!audioToPlay) {
+      dispatch(playAudio(audioToPlay, currentAudio.audio.index + 1));
     }
-
-    const nextIndex = this.state.songIndex + i;
-    this.setState(
-      {
-        audio: new Audio(this.props.songs[nextIndex].file_url),
-        playing: true,
-        songArtist: this.props.songs[nextIndex].artist,
-        songTitle: this.props.songs[nextIndex].title,
-        songIndex: nextIndex
-      },
-      () => {
-        this.state.audio.play();
-      }
-    );
   }
 
   render() {
+    const { audio } = this.props.currentAudio;
     return (
       <Toolbar>
         <ToolbarGroup firstChild={true}>
           <IconButton style={iconButtonStyle} onClick={this.SkipPrevious} iconStyle={iconStyle}>
             <SkipPrevious color="black" />
           </IconButton>
-          {!this.state.playing &&
-            <IconButton style={iconButtonStyle} onClick={this.playMusic} iconStyle={iconStyle}>
+          {!audio.playing &&
+            <IconButton style={iconButtonStyle} onClick={this.play} iconStyle={iconStyle}>
               <PlayArrow color="black" />
             </IconButton>
           }
-          {this.state.playing &&
-            <IconButton style={iconButtonStyle} onClick={this.pauseMusic} iconStyle={iconStyle}>
+          {audio.playing &&
+            <IconButton style={iconButtonStyle} onClick={this.pause} iconStyle={iconStyle}>
               <Pause color="black" />
             </IconButton>
           }
@@ -107,7 +96,7 @@ class Player extends React.Component {
           </IconButton>
         </ToolbarGroup>
         <ToolbarGroup>
-          <ToolbarTitle text={this.state.songArtist + ' : ' + this.state.songTitle} />
+          <ToolbarTitle text={audio.artist + ' / ' + audio.title + ' / ' + audio.duration} />
         </ToolbarGroup>
         <ToolbarGroup>
           <IconButton style={iconButtonStyle} iconStyle={iconStyle}>
@@ -134,8 +123,21 @@ class Player extends React.Component {
   }
 }
 
+Player.defaultProps = {
+  currentAudio: { audio: {
+    artist: '',
+    title: '',
+    duration: '0:0'
+  }}
+};
+
+Player.propTypes = {
+  currentAudio: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
+}
+
 function mapStateToProps(state) {
-  return state.allSongs;
+  return state;
 }
 
 export default connect(mapStateToProps)(Player)

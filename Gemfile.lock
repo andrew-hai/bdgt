@@ -59,7 +59,6 @@ GEM
     bindex (0.5.0)
     bower-rails (0.11.0)
     builder (3.2.3)
-    byebug (9.1.0)
     capistrano (3.9.1)
       airbrussh (>= 1.0.0)
       i18n
@@ -266,6 +265,7 @@ GEM
     sshkit (1.14.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    taglib-ruby (0.7.1)
     temple (0.8.0)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
@@ -297,7 +297,6 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   bower-rails
-  byebug
   capistrano
   capistrano-bundler
   capistrano-rails
@@ -323,6 +322,7 @@ DEPENDENCIES
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
+  taglib-ruby
   therubyracer
   turbolinks (~> 5)
   tzinfo-data

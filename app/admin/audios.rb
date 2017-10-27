@@ -5,9 +5,7 @@ ActiveAdmin.register Audio do
                 :year,
                 :track_number,
                 :genre,
-                :content,
-                :content2,
-                :language,
+                :duration,
                 :file
 
   config.sort_order = 'title_asc'
@@ -23,9 +21,7 @@ ActiveAdmin.register Audio do
     column :year
     column :track_number
     column :genre
-    column :content
-    column :content2
-    column :language
+    column :duration
 
     actions
   end
@@ -36,7 +32,5 @@ ActiveAdmin.register Audio do
   filter :year
   filter :track_number
   filter :genre
-  filter :content
-  filter :content2
-  filter :language
+  filter :duration
 end

@@ -4,7 +4,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import Root from './containers/Root'
 
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import './css/index.css';
@@ -15,4 +15,4 @@ render(
   <Root />,
   document.getElementById('root')
 );
-registerServiceWorker();
+// registerServiceWorker();
