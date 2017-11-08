@@ -43,8 +43,7 @@ export function playByIndex(index) {
 
 export function fetchAudios() {
   return dispatch => {
-    // return fetch(`http://videolist.com.ua/react/v1/audios`)
-    return fetch(`http://localhost:3300/react/v1/audios`)
+    return fetch(`http://videolist.com.ua/react/v1/audios`)
       .then(response => response.json())
       .then(json => {
         dispatch(receiveAudios(json));
