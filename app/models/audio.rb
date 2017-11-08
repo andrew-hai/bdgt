@@ -9,7 +9,7 @@ class Audio < ApplicationRecord
     super.tap do |result|
       result[:file_url] = file_url
       result[:img] = img
-      result[:duration] = "#{duration / 60}:" << "%02d" % (duration % 60)
+      result[:durationStr] = "#{duration / 60}:" << "%02d" % (duration % 60)
     end
   end
 
@@ -18,6 +18,6 @@ class Audio < ApplicationRecord
   end
 
   def img
-    ActionController::Base.helpers.image_url('music_cover.png')
+    ActionController::Base.helpers.image_url("music_cover#{[4,5].sample}.png")
   end
 end

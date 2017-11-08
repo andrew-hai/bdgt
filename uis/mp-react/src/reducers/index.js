@@ -21,7 +21,7 @@ function allAudios(state = {}, action) {
   }
 }
 
-function currentAudio(state = { audio: { artist: '', title: '', duration: '0:0' } }, action) {
+function currentAudio(state = { audio: { artist: '', title: '', duration: 1, durationStr: '0:0', volume: 1 } }, action) {
   switch (action.type) {
     case CURRENT_AUDIO:
       const fullAudio = Object.assign({}, action.audio, {

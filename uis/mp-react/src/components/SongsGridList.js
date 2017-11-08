@@ -48,7 +48,7 @@ class SongsGridList extends React.Component {
           cols={5}
           style={styles.gridList}
         >
-          <Subheader>Playlist</Subheader>
+          <Subheader>Whole Playlist</Subheader>
           {audios.map((tile) => (
             <GridTile
               key={tile.id}

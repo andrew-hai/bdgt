@@ -22,6 +22,7 @@ import IconMenu from 'material-ui/IconMenu';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import MenuItem from 'material-ui/MenuItem';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import Slider from 'material-ui/Slider';
 
 import {
   play,
@@ -41,9 +42,17 @@ const iconStyle = {
 };
 
 class Player extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentAudioTime: 0
+    };
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.currentAudio.audio.audioDom) {
       this.props.currentAudio.audio.audioDom.addEventListener('ended', this.skipNext);
+      this.props.currentAudio.audio.audioDom.addEventListener('timeupdate', this.timeUpdate);
     }
   }
 
@@ -57,7 +66,7 @@ class Player extends React.Component {
     dispatch(pause());
   }
 
-  SkipPrevious = () => {
+  skipPrevious = () => {
     const { dispatch, currentAudio, allAudios } = this.props;
     const audioToPlay = allAudios.audios[currentAudio.audio.index - 1];
     if (!!audioToPlay) {
@@ -73,12 +82,28 @@ class Player extends React.Component {
     }
   }
 
+  rewind = (e, newValue) => {
+    this.props.currentAudio.audio.audioDom.currentTime = newValue;
+  }
+
+  changeVolume = (e, newValue) => {
+    this.props.currentAudio.audio.audioDom.volume = newValue;
+  }
+
+  timeUpdate = () => {
+    this.setState({ currentAudioTime: this.props.currentAudio.audio.audioDom.currentTime })
+  }
+
   render() {
     const { audio } = this.props.currentAudio;
+    const { currentAudioTime } = this.state;
+    const volume = (!!audio.audioDom) ? audio.audioDom.volume : 0;
+    // Error connected with currentAudioTime
+
     return (
       <Toolbar>
         <ToolbarGroup firstChild={true}>
-          <IconButton style={iconButtonStyle} onClick={this.SkipPrevious} iconStyle={iconStyle}>
+          <IconButton style={iconButtonStyle} onClick={this.skipPrevious} iconStyle={iconStyle}>
             <SkipPrevious color="black" />
           </IconButton>
           {!audio.playing &&
@@ -94,6 +119,21 @@ class Player extends React.Component {
           <IconButton style={iconButtonStyle} onClick={this.skipNext} iconStyle={iconStyle}>
             <SkipNext color="black" />
           </IconButton>
+          <Slider
+            style={{width: 300, paddingTop: 25, marginLeft: 25}}
+            value={currentAudioTime}
+            max={audio.duration}
+            step={1}
+            onChange={this.rewind}
+          />
+          <Slider
+            style={{width: 75, paddingTop: 25, marginLeft: 25}}
+            value={volume}
+            min={0}
+            max={1}
+            step={0.05}
+            onChange={this.changeVolume}
+          />
         </ToolbarGroup>
         <ToolbarGroup>
           <ToolbarTitle text={audio.artist + ' / ' + audio.title + ' / ' + audio.duration} />
@@ -127,7 +167,8 @@ Player.defaultProps = {
   currentAudio: { audio: {
     artist: '',
     title: '',
-    duration: '0:0'
+    duration: 1,
+    durationStr: '0:0'
   }}
 };
 

@@ -2,7 +2,7 @@ require 'taglib'
 
 module React::V1
   class AudiosController < React::ApplicationController
-    before_action do
+    before_action only: [:index] do
       headers['Access-Control-Allow-Origin'] = '*'
       headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
       headers['Access-Control-Request-Method'] = '*'
@@ -10,12 +10,14 @@ module React::V1
     end
 
     def index
-      # render json: Audio.order(artist: :asc, title: :asc).all.as_json
-      render json: Audio.order('RANDOM ()').all.as_json
+      # render json: Audio.order('RANDOM ()').all.as_json
+      render json: Audio.order(artist: :asc, title: :asc).all.as_json
     end
 
     def seed
-      Audio.destroy_all
+      if params[:truncate] == 'true'
+        Audio.destroy_all
+      end
 
       mp3s = Dir.entries("#{Rails.root}/public/media").select { |filename| filename =~ /\.mp3/i }
 

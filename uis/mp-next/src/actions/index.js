@@ -1,32 +1,15 @@
 import fetch from 'isomorphic-fetch'
 
-export const REQUEST_AUDIOS = 'REQUEST_AUDIOS'
 export const RECEIVE_AUDIOS = 'RECEIVE_AUDIOS'
-export const CURRENT_AUDIO = 'CURRENT_AUDIO'
 export const PLAY = 'PLAY'
 export const PAUSE = 'PAUSE'
-export const PLAY_AUDIO = 'PLAY_AUDIO'
-
-function requestAudios() {
-  return {
-    isFetching: true,
-    audios: [],
-    type: REQUEST_AUDIOS
-  }
-}
+export const SKIP = 'SKIP'
+export const PLAY_BY_INDEX = 'PLAY_BY_INDEX'
 
 function receiveAudios(json) {
   return {
-    isFetching: false,
     audios: json,
     type: RECEIVE_AUDIOS
-  }
-}
-
-function currentAudio(audio) {
-  return {
-    audio: audio,
-    type: CURRENT_AUDIO
   }
 }
 
@@ -44,23 +27,27 @@ export function pause() {
   }
 }
 
-export function playAudio(audio, index) {
+export function skip(by) {
   return {
-    audio: audio,
+    by: by,
+    type: SKIP
+  }
+}
+
+export function playByIndex(index) {
+  return {
     index: index,
-    type: PLAY_AUDIO
+    type: PLAY_BY_INDEX
   }
 }
 
 export function fetchAudios() {
   return dispatch => {
-    dispatch(requestAudios())
     // return fetch(`http://videolist.com.ua/react/v1/audios`)
     return fetch(`http://localhost:3300/react/v1/audios`)
       .then(response => response.json())
       .then(json => {
         dispatch(receiveAudios(json));
-        dispatch(currentAudio(json[0]));
       })
   }
 }
