@@ -77,8 +77,10 @@ class Player extends React.Component {
     const p1 = Math.round(this.props.audioDom.currentTime / 60);
     let p2 = Math.round(this.props.audioDom.currentTime % 60);
     if (p2 < 10) { p2 = '0' + p2; }
-    this.setState({ playProgress: (this.props.audioDom.currentTime / this.props.audio.duration * 100) });
     this.setState({ playProgressStr: `${p1}:${p2}` });
+
+    const audio = this.props.audios[this.props.audioIndex];
+    this.setState({ playProgress: (this.props.audioDom.currentTime / audio.duration * 100) });
   }
 
   render() {
@@ -140,24 +142,11 @@ Player.defaultProps = {
 };
 
 Player.propTypes = {
-  audio: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state) {
-  // const { playing, audios, audioDom } = state.playerData;
-
-  // if (audios.length > 0) {
-  //   return {
-  //     playing: playing,
-  //     audio: audios[state.playerData.audioIndex],
-  //     audioDom: audioDom
-  //   }
-  // } else {
-  //   return { playing: playing }
-  // }
-
   return state.playerData;
 }
 
