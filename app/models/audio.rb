@@ -3,7 +3,13 @@ class Audio < ApplicationRecord
     url: '/audios/:hash.:extension',
     hash_secret: 'longSecretStringlongSecretStringlongSecretStringlongSecretString'
   }
-  validates_attachment_content_type :file, content_type: ['audio/mp3', ['audio/mp3'], 'audio/mpeg']
+  validates_attachment_content_type :file, content_type: [
+    'audio/mp3',
+    ['audio/mp3'],
+    'audio/mpeg',
+    'audio/flac',
+    'audio/x-flac'
+  ]
 
   def as_json(options = {})
     super.tap do |result|

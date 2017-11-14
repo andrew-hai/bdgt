@@ -4,10 +4,12 @@ import {
   PLAY,
   PAUSE,
   SKIP,
-  PLAY_BY_INDEX
+  PLAY_BY_INDEX,
+  TO_VIEW,
+  TOGGLE_SHUFFLE
 } from '../actions/index'
 
-function playerData(state = { playing: false, audios: [] }, action) {
+function playerData(state = { playing: false, shuffle: false, audios: [], view: 'list' }, action) {
   switch (action.type) {
     case RECEIVE_AUDIOS:
       return Object.assign({}, state, {
@@ -25,7 +27,7 @@ function playerData(state = { playing: false, audios: [] }, action) {
       return Object.assign({}, state, { playing: false });
     case SKIP:
       let skipTo = state.audioIndex + action.by;
-      if (skipTo < 0 || skipTo > state.audios.length) { skipTo = 0; }
+      if (skipTo < 0 || skipTo >= (state.audios.length - 1)) { skipTo = 0; }
 
       if (!!state.audioDom) { state.audioDom.pause(); }
 
@@ -45,6 +47,10 @@ function playerData(state = { playing: false, audios: [] }, action) {
         audioDom: createAndPlay(state.audios[index].file_url),
         playing: true
       });
+    case TO_VIEW:
+      return Object.assign({}, state, { view: action.view });
+    case TOGGLE_SHUFFLE:
+      return Object.assign({}, state, { shuffle: !state.shuffle });
     default:
       return state
   }
@@ -58,6 +64,7 @@ export default rootReducer
 
 function createAndPlay(file_url) {
   const audioDom = new Audio(file_url);
+  audioDom.volume = 0.5;
   audioDom.play();
   return audioDom;
 }

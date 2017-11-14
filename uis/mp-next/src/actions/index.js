@@ -5,6 +5,8 @@ export const PLAY = 'PLAY'
 export const PAUSE = 'PAUSE'
 export const SKIP = 'SKIP'
 export const PLAY_BY_INDEX = 'PLAY_BY_INDEX'
+export const TO_VIEW = 'TO_VIEW'
+export const TOGGLE_SHUFFLE = 'TOGGLE_SHUFFLE'
 
 function receiveAudios(json) {
   return {
@@ -48,5 +50,18 @@ export function fetchAudios() {
       .then(json => {
         dispatch(receiveAudios(json));
       })
+  }
+}
+
+export function toView(view) {
+  return {
+    view: view,
+    type: TO_VIEW
+  }
+}
+
+export function toggleShuffle() {
+  return {
+    type: TOGGLE_SHUFFLE
   }
 }

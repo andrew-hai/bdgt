@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import '../css/App.css';
 // import TopBar from '../components/TopBar'
 import Player from '../components/Player'
-import SongsGridList from '../components/SongsGridList'
+import AudiosList from '../components/AudiosList'
+import AudiosGridList from '../components/AudiosGridList'
 import LabelBottomNavigation from '../components/LabelBottomNavigation'
 
 import { connect } from 'react-redux'
@@ -18,10 +19,17 @@ class App extends Component {
   }
 
   render() {
+    const { view } = this.props.playerData;
+
     return (
       <div>
         <Player />
-        <SongsGridList />
+        { view === 'list' &&
+          <AudiosList />
+        }
+        { view === 'grid' &&
+          <AudiosGridList />
+        }
         <LabelBottomNavigation />
       </div>
     );

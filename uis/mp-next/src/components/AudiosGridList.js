@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 import { withStyles } from 'material-ui/styles';
 import { GridList, GridListTile, GridListTileBar } from 'material-ui/GridList';
@@ -8,11 +8,13 @@ import Subheader from 'material-ui/List/ListSubheader';
 import IconButton from 'material-ui/IconButton';
 import PlayCircleOutline from 'material-ui-icons/PlayCircleOutline';
 import PauseCircleOutline from 'material-ui-icons/PauseCircleOutline';
+import ViewList from 'material-ui-icons/ViewList';
 
 import {
   play,
   pause,
-  playByIndex
+  playByIndex,
+  toView
 } from '../actions/index'
 
 const styles = theme => ({
@@ -27,9 +29,12 @@ const styles = theme => ({
     maxWidth: 1100,
     paddingTop: 64
   },
+  textRight: {
+    textAlign: 'right'
+  }
 });
 
-class SongsGridList extends React.Component {
+class AudiosGridList extends React.Component {
   playByIndex = (index) => {
     const { dispatch } = this.props;
     dispatch(playByIndex(index));
@@ -45,6 +50,11 @@ class SongsGridList extends React.Component {
     dispatch(pause());
   }
 
+  toView = () => {
+    const { dispatch } = this.props;
+    dispatch(toView('list'));
+  }
+
   render() {
     const { audios, audioIndex, playing } = this.props;
     const { classes } = this.props;
@@ -52,8 +62,13 @@ class SongsGridList extends React.Component {
     return (
       <div className={classes.container}>
         <GridList cellHeight={180} className={classes.gridList} cols={5}>
-          <GridListTile key="Subheader" cols={5} style={{ height: 'auto' }}>
-            <Subheader>Whole Playlist</Subheader>
+          <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
+            <Subheader component="div">Whole Playlist</Subheader>
+          </GridListTile>
+          <GridListTile key="Viewicon" className={classes.textRight} style={{ height: 'auto' }}>
+            <IconButton onClick={() => this.toView()}>
+              <ViewList color="rgba(0, 0, 0, 0.8)" />
+            </IconButton>
           </GridListTile>
           {audios.map((audio, i) => (
             <GridListTile key={audio.id}>
@@ -89,14 +104,14 @@ class SongsGridList extends React.Component {
   }
 }
 
-SongsGridList.defaultProps = {
+AudiosGridList.defaultProps = {
   audios: [],
   playing: false
 };
 
-SongsGridList.propTypes = {
+AudiosGridList.propTypes = {
   audios: PropTypes.array.isRequired,
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
@@ -104,5 +119,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(
-  withStyles(styles)(SongsGridList)
+  withStyles(styles)(AudiosGridList)
 )

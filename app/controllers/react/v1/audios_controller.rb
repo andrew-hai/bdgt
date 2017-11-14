@@ -10,7 +10,7 @@ module React::V1
     end
 
     def index
-      render json: Audio.order('RANDOM ()').all.as_json
+      render json: Audio.order(artist: :asc, title: :asc).all.as_json
     end
 
     def seed
@@ -18,9 +18,9 @@ module React::V1
         Audio.destroy_all
       end
 
-      mp3s = Dir.entries("#{Rails.root}/public/media").select { |filename| filename =~ /\.mp3/i }
+      files = Dir.entries("#{Rails.root}/public/media").select { |filename| filename =~ /\.mp3|\.flac/i }
 
-      mp3s.each do |file|
+      files.each do |file|
         id_3_tag = ID3Tag.read(File.open("#{Rails.root}/public/media/#{file}", 'rb'))        
         TagLib::FileRef.open("#{Rails.root}/public/media/#{file}") do |fileref|
 

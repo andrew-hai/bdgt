@@ -11,12 +11,14 @@ import PlayArrowIcon from 'material-ui-icons/PlayArrow';
 import PauseIcon from 'material-ui-icons/Pause';
 import SkipPreviousIcon from 'material-ui-icons/SkipPrevious';
 import SkipNextIcon from 'material-ui-icons/SkipNext';
+import ShuffleIcon from 'material-ui-icons/Shuffle';
 import { LinearProgress } from 'material-ui/Progress';
 
 import {
   play,
   pause,
-  skip
+  skip,
+  toggleShuffle
 } from '../actions/index'
 
 const styles = theme => ({
@@ -66,13 +68,10 @@ class Player extends React.Component {
     dispatch(skip(1));
   }
 
-  // rewind = (e, newValue) => {
-  //   this.props.currentAudio.audio.audioDom.currentTime = newValue;
-  // }
-
-  // changeVolume = (e, newValue) => {
-  //   this.props.currentAudio.audio.audioDom.volume = newValue;
-  // }
+  toggleShuffle = () => {
+    const { dispatch } = this.props;
+    dispatch(toggleShuffle());
+  }
 
   timeUpdate = () => {
     const p1 = Math.round(this.props.audioDom.currentTime / 60);
@@ -84,7 +83,8 @@ class Player extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { playing, audio } = this.props;
+    const { playing, shuffle } = this.props;
+    const audio = this.props.audios[this.props.audioIndex] || {};
 
     return (
       <AppBar position="fixed">
@@ -108,6 +108,16 @@ class Player extends React.Component {
           <div className={classes.playProgressRoot}>
             <LinearProgress color="accent" mode="determinate" value={this.state.playProgress} />
           </div>
+          {!shuffle &&
+            <IconButton color="contrast" onClick={this.toggleShuffle} aria-label="Shuffle">
+              <ShuffleIcon color="rgba(255, 255, 255, 0.6)"/>
+            </IconButton>
+          }
+          {shuffle &&
+            <IconButton color="contrast" onClick={this.toggleShuffle} aria-label="Shuffle">
+              <ShuffleIcon color="rgba(255, 255, 255, 1)"/>
+            </IconButton>
+          }
           <Typography type="title" color="inherit" className={classes.title}>
             { this.state.playProgressStr + ' / ' + audio.durationStr }
           </Typography>
@@ -122,6 +132,7 @@ class Player extends React.Component {
 
 Player.defaultProps = {
   playing: false,
+  shuffle: false,
   audio: {
     title: '...',
     artist: '...'
@@ -135,17 +146,19 @@ Player.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { playing, audios, audioDom } = state.playerData;
+  // const { playing, audios, audioDom } = state.playerData;
 
-  if (audios.length > 0) {
-    return {
-      playing: playing,
-      audio: audios[state.playerData.audioIndex],
-      audioDom: audioDom
-    }
-  } else {
-    return { playing: playing }
-  }
+  // if (audios.length > 0) {
+  //   return {
+  //     playing: playing,
+  //     audio: audios[state.playerData.audioIndex],
+  //     audioDom: audioDom
+  //   }
+  // } else {
+  //   return { playing: playing }
+  // }
+
+  return state.playerData;
 }
 
 export default connect(mapStateToProps)(
