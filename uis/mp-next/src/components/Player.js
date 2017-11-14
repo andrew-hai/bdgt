@@ -60,12 +60,12 @@ class Player extends React.Component {
 
   skipPrevious = () => {
     const { dispatch } = this.props;
-    dispatch(skip(-1));
+    dispatch(skip('previous'));
   }
 
   skipNext = () => {
     const { dispatch } = this.props;
-    dispatch(skip(1));
+    dispatch(skip('next'));
   }
 
   toggleShuffle = () => {
@@ -74,6 +74,7 @@ class Player extends React.Component {
   }
 
   timeUpdate = () => {
+    // After 30 seconds app increments minute ((
     const p1 = Math.round(this.props.audioDom.currentTime / 60);
     let p2 = Math.round(this.props.audioDom.currentTime % 60);
     if (p2 < 10) { p2 = '0' + p2; }

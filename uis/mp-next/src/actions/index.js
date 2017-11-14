@@ -29,9 +29,9 @@ export function pause() {
   }
 }
 
-export function skip(by) {
+export function skip(direction) {
   return {
-    by: by,
+    direction: direction,
     type: SKIP
   }
 }

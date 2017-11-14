@@ -26,7 +26,18 @@ function playerData(state = { playing: false, shuffle: false, audios: [], view: 
 
       return Object.assign({}, state, { playing: false });
     case SKIP:
-      let skipTo = state.audioIndex + action.by;
+      let skipTo;
+
+      if (action.direction === 'next') {
+        if (state.shuffle) {
+          skipTo = Math.round((Math.random() * (state.audios.length - 0) + 0));
+        } else {
+          skipTo = state.audioIndex + 1;
+        }
+      } else if (action.direction === 'previous') {
+        skipTo = state.audioIndex - 1;
+      }
+
       if (skipTo < 0 || skipTo >= (state.audios.length - 1)) { skipTo = 0; }
 
       if (!!state.audioDom) { state.audioDom.pause(); }
