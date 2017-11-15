@@ -45,11 +45,13 @@ export function playByIndex(index) {
 
 export function fetchAudios() {
   return dispatch => {
-    return fetch(`http://videolist.com.ua/react/v1/audios`)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(receiveAudios(json));
-      })
+    return fetch(
+      `http://videolist.com.ua/react/v1/audios`,
+      { credentials: 'include' })
+        .then(response => response.json())
+        .then(json => {
+          dispatch(receiveAudios(json));
+        })
   }
 }
 
