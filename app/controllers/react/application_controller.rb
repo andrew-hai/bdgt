@@ -1,5 +1,4 @@
 module React
-  class ApplicationController < ActionController::API
-    # before_action :authenticate_user!
+  class ApplicationController < ::ApplicationController
   end
 end
