@@ -44,9 +44,10 @@ export function playByIndex(index) {
 }
 
 export function fetchAudios() {
+  // https://videolist.com.ua/react/v1/audios
   return dispatch => {
     return fetch(
-      `http://videolist.com.ua/react/v1/audios`,
+      `https://videolist.com.ua/react/v1/audios`,
       { credentials: 'include' })
         .then(response => response.json())
         .then(json => {

@@ -2,13 +2,6 @@ require 'taglib'
 
 module React::V1
   class AudiosController < React::ApplicationController
-    before_action only: [:index] do
-      headers['Access-Control-Allow-Origin'] = '*'
-      headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
-      headers['Access-Control-Request-Method'] = '*'
-      headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    end
-
     def index
       render json: Audio.order(artist: :asc, title: :asc).all.as_json
     end
