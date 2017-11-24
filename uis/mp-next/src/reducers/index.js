@@ -13,9 +13,12 @@ import {
 function playerData(state = { playing: false, shuffle: false, audios: [], view: 'list', volume: 0.5 }, action) {
   switch (action.type) {
     case RECEIVE_AUDIOS:
+      const audioDom = new Audio(action.audios[0].file_url);
+      audioDom.volume = 0.5;
+
       return Object.assign({}, state, {
         audioIndex: 0,
-        audioDom: new Audio(action.audios[0].file_url),
+        audioDom: audioDom,
         audios: action.audios.map((a, i) => Object.assign(a, { index: i }))
       });
     case PLAY:
