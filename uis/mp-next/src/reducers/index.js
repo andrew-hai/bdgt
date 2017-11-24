@@ -6,10 +6,11 @@ import {
   SKIP,
   PLAY_BY_INDEX,
   TO_VIEW,
-  TOGGLE_SHUFFLE
+  TOGGLE_SHUFFLE,
+  CHANGE_VOLUME
 } from '../actions/index'
 
-function playerData(state = { playing: false, shuffle: false, audios: [], view: 'list' }, action) {
+function playerData(state = { playing: false, shuffle: false, audios: [], view: 'list', volume: 0.5 }, action) {
   switch (action.type) {
     case RECEIVE_AUDIOS:
       return Object.assign({}, state, {
@@ -44,7 +45,7 @@ function playerData(state = { playing: false, shuffle: false, audios: [], view: 
 
       return Object.assign({}, state, {
         audioIndex: skipTo,
-        audioDom: createAndPlay(state.audios[skipTo].file_url),
+        audioDom: createAndPlay(state, skipTo),
         playing: true
       });
     case PLAY_BY_INDEX:
@@ -55,13 +56,17 @@ function playerData(state = { playing: false, shuffle: false, audios: [], view: 
 
       return Object.assign({}, state, {
         audioIndex: index,
-        audioDom: createAndPlay(state.audios[index].file_url),
+        audioDom: createAndPlay(state, index),
         playing: true
       });
     case TO_VIEW:
       return Object.assign({}, state, { view: action.view });
     case TOGGLE_SHUFFLE:
       return Object.assign({}, state, { shuffle: !state.shuffle });
+    case CHANGE_VOLUME:
+      if (!!state.audioDom) { state.audioDom.volume = action.volume; }
+
+      return Object.assign({}, state, { volume: action.volume });
     default:
       return state
   }
@@ -73,9 +78,9 @@ const rootReducer = combineReducers({
 
 export default rootReducer
 
-function createAndPlay(file_url) {
-  const audioDom = new Audio(file_url);
-  audioDom.volume = 0.5;
+function createAndPlay(state, index) {
+  const audioDom = new Audio(state.audios[index].file_url);
+  audioDom.volume = state.volume;
   audioDom.play();
   return audioDom;
 }

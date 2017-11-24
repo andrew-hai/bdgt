@@ -7,6 +7,7 @@ export const SKIP = 'SKIP'
 export const PLAY_BY_INDEX = 'PLAY_BY_INDEX'
 export const TO_VIEW = 'TO_VIEW'
 export const TOGGLE_SHUFFLE = 'TOGGLE_SHUFFLE'
+export const CHANGE_VOLUME = 'CHANGE_VOLUME'
 
 function receiveAudios(json) {
   return {
@@ -44,15 +45,16 @@ export function playByIndex(index) {
 }
 
 export function fetchAudios() {
-  // https://videolist.com.ua/react/v1/audios
+  // /react/v1/audios
+  // /users/sign_in
   return dispatch => {
     return fetch(
-      `https://videolist.com.ua/react/v1/audios`,
-      { credentials: 'include' })
-        .then(response => response.json())
-        .then(json => {
-          dispatch(receiveAudios(json));
-        })
+      '/react/v1/audios',
+      { credentials: 'include' }
+    ).then(response => response.json())
+    .then(json => {
+      dispatch(receiveAudios(json));
+    })
   }
 }
 
@@ -66,5 +68,12 @@ export function toView(view) {
 export function toggleShuffle() {
   return {
     type: TOGGLE_SHUFFLE
+  }
+}
+
+export function changeVolume(volume) {
+  return {
+    volume: volume,
+    type: CHANGE_VOLUME
   }
 }

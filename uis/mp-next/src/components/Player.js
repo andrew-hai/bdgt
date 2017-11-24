@@ -14,11 +14,17 @@ import SkipNextIcon from 'material-ui-icons/SkipNext';
 import ShuffleIcon from 'material-ui-icons/Shuffle';
 import { LinearProgress } from 'material-ui/Progress';
 
+import Input, { InputLabel } from 'material-ui/Input';
+import { MenuItem } from 'material-ui/Menu';
+import { FormControl } from 'material-ui/Form';
+import Select from 'material-ui/Select';
+
 import {
   play,
   pause,
   skip,
-  toggleShuffle
+  toggleShuffle,
+  changeVolume
 } from '../actions/index'
 
 const styles = theme => ({
@@ -73,6 +79,11 @@ class Player extends React.Component {
     dispatch(toggleShuffle());
   }
 
+  changeVolume = (event) => {
+    const { dispatch } = this.props;
+    dispatch(changeVolume(event.target.value));
+  }
+
   timeUpdate = () => {
     // After 30 seconds app increments minute ((
     const p1 = Math.round(this.props.audioDom.currentTime / 60);
@@ -86,7 +97,7 @@ class Player extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { playing, shuffle } = this.props;
+    const { playing, shuffle, volume } = this.props;
     const audio = this.props.audios[this.props.audioIndex] || {};
 
     return (
@@ -111,6 +122,25 @@ class Player extends React.Component {
           <div className={classes.playProgressRoot}>
             <LinearProgress color="accent" mode="determinate" value={this.state.playProgress} />
           </div>
+
+          <FormControl>
+            <InputLabel htmlFor="volume" style={{color: '#FFF'}}>Volume</InputLabel>
+            <Select
+              value={volume}
+              input={<Input id="volume" />}
+              onChange={this.changeVolume}
+              style={{color: '#FFF'}}
+            >
+              <MenuItem value={0}>
+                <em>0%</em>
+              </MenuItem>
+              <MenuItem value={0.25}>25%</MenuItem>
+              <MenuItem value={0.5}>50%</MenuItem>
+              <MenuItem value={0.75}>75%</MenuItem>
+              <MenuItem value={1}>100%</MenuItem>
+            </Select>
+          </FormControl>
+
           {!shuffle &&
             <IconButton color="contrast" onClick={this.toggleShuffle} aria-label="Shuffle">
               <ShuffleIcon color="rgba(255, 255, 255, 0.6)"/>
@@ -136,6 +166,7 @@ class Player extends React.Component {
 Player.defaultProps = {
   playing: false,
   shuffle: false,
+  volume: 0.5,
   audio: {
     title: '...',
     artist: '...'
