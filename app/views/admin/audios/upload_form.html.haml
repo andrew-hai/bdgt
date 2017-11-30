@@ -1,0 +1,6 @@
+%h1 Upload form
+
+= semantic_form_for [:admin, Audio.new], builder: ActiveAdmin::FormBuilder, url: '/admin/audios/upload' do |f|
+  = f.inputs 'Files' do
+    = f.input :files, as: :file, input_html: { multiple: true }
+  = f.actions
