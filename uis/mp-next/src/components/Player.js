@@ -85,20 +85,19 @@ class Player extends React.Component {
   }
 
   timeUpdate = () => {
-    // After 30 seconds app increments minute ((
-    const p1 = Math.round(this.props.audioDom.currentTime / 60);
+    const p1 = Math.floor(this.props.audioDom.currentTime / 60);
     let p2 = Math.round(this.props.audioDom.currentTime % 60);
     if (p2 < 10) { p2 = '0' + p2; }
     this.setState({ playProgressStr: `${p1}:${p2}` });
 
-    const audio = this.props.audios[this.props.audioIndex];
+    const audio = this.props.allAudios.find(a => a.id === this.props.audioId);
     this.setState({ playProgress: (this.props.audioDom.currentTime / audio.duration * 100) });
   }
 
   render() {
     const { classes } = this.props;
     const { playing, shuffle, volume } = this.props;
-    const audio = this.props.audios[this.props.audioIndex] || {};
+    const audio = this.props.allAudios.find(a => a.id === this.props.audioId) || {};
 
     return (
       <AppBar position="fixed">
@@ -164,9 +163,10 @@ class Player extends React.Component {
 }
 
 Player.defaultProps = {
+  allAudios: [],
   playing: false,
   shuffle: false,
-  volume: 0.5,
+  volume: 0.25,
   audio: {
     title: '...',
     artist: '...'

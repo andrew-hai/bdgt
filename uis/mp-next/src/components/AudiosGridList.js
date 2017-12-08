@@ -4,17 +4,21 @@ import { connect } from 'react-redux';
 
 import { withStyles } from 'material-ui/styles';
 import { GridList, GridListTile, GridListTileBar } from 'material-ui/GridList';
-import Subheader from 'material-ui/List/ListSubheader';
 import IconButton from 'material-ui/IconButton';
 import PlayCircleOutline from 'material-ui-icons/PlayCircleOutline';
 import PauseCircleOutline from 'material-ui-icons/PauseCircleOutline';
 import ViewList from 'material-ui-icons/ViewList';
 
+import Input, { InputAdornment }from 'material-ui/Input';
+import { FormControl } from 'material-ui/Form';
+import SearchIcon from 'material-ui-icons/Search';
+
 import {
   play,
   pause,
-  playByIndex,
-  toView
+  playById,
+  toView,
+  filter
 } from '../actions/index'
 
 const styles = theme => ({
@@ -35,9 +39,9 @@ const styles = theme => ({
 });
 
 class AudiosGridList extends React.Component {
-  playByIndex = (index) => {
+  playById = (index) => {
     const { dispatch } = this.props;
-    dispatch(playByIndex(index));
+    dispatch(playById(index));
   }
 
   play = () => {
@@ -55,15 +59,29 @@ class AudiosGridList extends React.Component {
     dispatch(toView('list'));
   }
 
+  filter = (event) => {
+    const { dispatch } = this.props;
+    dispatch(filter(event.target.value));
+  }
+
   render() {
-    const { audios, audioIndex, playing } = this.props;
+    const { audios, audioId, playing, filterStr } = this.props;
     const { classes } = this.props;
 
     return (
       <div className={classes.container}>
         <GridList cellHeight={180} className={classes.gridList} cols={5}>
           <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
-            <Subheader component="div">Whole Playlist</Subheader>
+            <FormControl>
+              <Input
+                id="weight"
+                placeholder="Filter songs"
+                onChange={this.filter}
+                value={filterStr}
+                endAdornment={<InputAdornment position="end"><SearchIcon color="rgba(0, 0, 0, 0.5)" /></InputAdornment>}
+                margin="normal"
+              />
+            </FormControl>
           </GridListTile>
           <GridListTile key="Viewicon" className={classes.textRight} style={{ height: 'auto' }}>
             <IconButton onClick={() => this.toView()}>
@@ -78,18 +96,18 @@ class AudiosGridList extends React.Component {
                 subtitle={<span>by: {audio.artist}</span>}
                 actionIcon={
                   <span>
-                    { (audioIndex === audio.index && !playing) &&
+                    { (audioId === audio.id && !playing) &&
                       <IconButton onClick={this.play}>
                         <PlayCircleOutline color="rgba(255, 255, 255, 1)" />
                       </IconButton>
                     }
-                    { (audioIndex === audio.index && playing) &&
+                    { (audioId === audio.id && playing) &&
                       <IconButton onClick={this.pause}>
                         <PauseCircleOutline color="rgba(255, 255, 255, 1)" />
                       </IconButton>
                     }
-                    { (audioIndex !== audio.index) &&
-                      <IconButton onClick={() => this.playByIndex(audio.index)}>
+                    { (audioId !== audio.id) &&
+                      <IconButton onClick={() => this.playById(audio.id)}>
                         <PlayCircleOutline color="rgba(255, 255, 255, 1)" />
                       </IconButton>
                     }
@@ -106,6 +124,7 @@ class AudiosGridList extends React.Component {
 
 AudiosGridList.defaultProps = {
   audios: [],
+  filterStr: '',
   playing: false
 };
 

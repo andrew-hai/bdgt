@@ -4,10 +4,11 @@ export const RECEIVE_AUDIOS = 'RECEIVE_AUDIOS'
 export const PLAY = 'PLAY'
 export const PAUSE = 'PAUSE'
 export const SKIP = 'SKIP'
-export const PLAY_BY_INDEX = 'PLAY_BY_INDEX'
+export const PLAY_BY_ID = 'PLAY_BY_ID'
 export const TO_VIEW = 'TO_VIEW'
 export const TOGGLE_SHUFFLE = 'TOGGLE_SHUFFLE'
 export const CHANGE_VOLUME = 'CHANGE_VOLUME'
+export const FILTER = 'FILTER'
 
 function receiveAudios(json) {
   return {
@@ -37,16 +38,14 @@ export function skip(direction) {
   }
 }
 
-export function playByIndex(index) {
+export function playById(id) {
   return {
-    index: index,
-    type: PLAY_BY_INDEX
+    id: id,
+    type: PLAY_BY_ID
   }
 }
 
 export function fetchAudios() {
-  // /react/v1/audios
-  // /users/sign_in
   return dispatch => {
     return fetch(
       '/react/v1/audios',
@@ -75,5 +74,12 @@ export function changeVolume(volume) {
   return {
     volume: volume,
     type: CHANGE_VOLUME
+  }
+}
+
+export function filter(value) {
+  return {
+    value: value,
+    type: FILTER
   }
 }

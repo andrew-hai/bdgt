@@ -4,24 +4,30 @@ import { connect } from 'react-redux';
 
 import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
-import Subheader from 'material-ui/List/ListSubheader';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import PlayCircleOutline from 'material-ui-icons/PlayCircleOutline';
 import PauseCircleOutline from 'material-ui-icons/PauseCircleOutline';
+import SearchIcon from 'material-ui-icons/Search';
 import GridOn from 'material-ui-icons/GridOn';
+import Input, { InputAdornment }from 'material-ui/Input';
+import { FormControl } from 'material-ui/Form';
 
 import {
   play,
   pause,
-  playByIndex,
-  toView
+  playById,
+  toView,
+  filter
 } from '../actions/index'
 
 const styles = theme => ({
   avatar: {
     borderRadius: 0
+  },
+  filter: {
+    paddingLeft: 0
   },
   list: {
     width: '100%',
@@ -38,9 +44,9 @@ const styles = theme => ({
 });
 
 class AudiosList extends React.Component {
-  playByIndex = (index) => {
+  playById = (index) => {
     const { dispatch } = this.props;
-    dispatch(playByIndex(index));
+    dispatch(playById(index));
   }
 
   play = () => {
@@ -58,15 +64,29 @@ class AudiosList extends React.Component {
     dispatch(toView('grid'));
   }
 
+  filter = (event) => {
+    const { dispatch } = this.props;
+    dispatch(filter(event.target.value));
+  }
+
   render() {
-    const { audios, audioIndex, playing } = this.props;
+    const { audios, audioId, playing, filterStr } = this.props;
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
         <List className={classes.list}>
           <ListItem style={{ height: 26 }}>
-            <Subheader component="div">Whole Playlist</Subheader>
+            <FormControl>
+              <Input
+                id="weight"
+                placeholder="Filter songs"
+                onChange={this.filter}
+                value={filterStr}
+                endAdornment={<InputAdornment position="end"><SearchIcon color="rgba(0, 0, 0, 0.5)" /></InputAdornment>}
+                margin="normal"
+              />
+            </FormControl>
             <ListItemSecondaryAction>
               <IconButton onClick={() => this.toView()}>
                 <GridOn color="rgba(0, 0, 0, 0.8)" />
@@ -80,18 +100,18 @@ class AudiosList extends React.Component {
                 <Avatar src={audio.img} className={classes.avatar} />
                 <ListItemText primary={audio.title} secondary={`${audio.artist} / ${audio.album} / ${audio.durationStr}`} />
                 <ListItemSecondaryAction>
-                  { (audioIndex === audio.index && !playing) &&
+                  { (audioId === audio.id && !playing) &&
                     <IconButton onClick={this.play}>
                       <PlayCircleOutline color="rgba(0, 0, 0, 0.8)" />
                     </IconButton>
                   }
-                  { (audioIndex === audio.index && playing) &&
+                  { (audioId === audio.id && playing) &&
                     <IconButton onClick={this.pause}>
                       <PauseCircleOutline color="rgba(0, 0, 0, 0.8)" />
                     </IconButton>
                   }
-                  { (audioIndex !== audio.index) &&
-                    <IconButton onClick={() => this.playByIndex(audio.index)}>
+                  { (audioId !== audio.id) &&
+                    <IconButton onClick={() => this.playById(audio.id)}>
                       <PlayCircleOutline color="rgba(0, 0, 0, 0.8)" />
                     </IconButton>
                   }
@@ -108,6 +128,7 @@ class AudiosList extends React.Component {
 
 AudiosList.defaultProps = {
   audios: [],
+  filterStr: '',
   playing: false
 };
 

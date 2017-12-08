@@ -4,19 +4,17 @@ import { withStyles } from 'material-ui/styles';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import RestoreIcon from 'material-ui-icons/Restore';
 import FavoriteIcon from 'material-ui-icons/Favorite';
-import LocationOnIcon from 'material-ui-icons/LocationOn';
-import FolderIcon from 'material-ui-icons/Folder';
 
 const styles = {
   root: {
     margin: '25px auto 0',
-    width: 500,
+    width: 250,
   },
 };
 
 class LabelBottomNavigation extends React.Component {
   state = {
-    value: 'recents',
+    value: 'all',
   };
 
   handleChange = (event, value) => {
@@ -29,10 +27,8 @@ class LabelBottomNavigation extends React.Component {
 
     return (
       <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
-        <BottomNavigationButton label="Recents" value="recents" icon={<RestoreIcon />} />
+        <BottomNavigationButton label="All" value="all" icon={<RestoreIcon />} />
         <BottomNavigationButton label="Favorites" value="favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationButton label="Nearby" value="nearby" icon={<LocationOnIcon />} />
-        <BottomNavigationButton label="Folder" value="folder" icon={<FolderIcon />} />
       </BottomNavigation>
     );
   }
