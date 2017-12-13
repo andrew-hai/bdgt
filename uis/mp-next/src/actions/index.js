@@ -10,9 +10,11 @@ export const TOGGLE_SHUFFLE = 'TOGGLE_SHUFFLE'
 export const CHANGE_VOLUME = 'CHANGE_VOLUME'
 export const FILTER = 'FILTER'
 
-function receiveAudios(json) {
+export const RECEIVE_USER = 'RECEIVE_USER'
+
+function receiveAudios(audios) {
   return {
-    audios: json,
+    audios: audios,
     type: RECEIVE_AUDIOS
   }
 }
@@ -81,5 +83,24 @@ export function filter(value) {
   return {
     value: value,
     type: FILTER
+  }
+}
+
+function receiveUser(user) {
+  return {
+    user: user,
+    type: RECEIVE_USER
+  }
+}
+
+export function fetchUser() {
+  return dispatch => {
+    return fetch(
+      '/react/v1/users/current',
+      { credentials: 'include' }
+    ).then(response => response.json())
+    .then(json => {
+      dispatch(receiveUser(json));
+    })
   }
 }

@@ -9,17 +9,11 @@ import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import PlayCircleOutline from 'material-ui-icons/PlayCircleOutline';
 import PauseCircleOutline from 'material-ui-icons/PauseCircleOutline';
-import SearchIcon from 'material-ui-icons/Search';
-import GridOn from 'material-ui-icons/GridOn';
-import Input, { InputAdornment }from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
 
 import {
   play,
   pause,
-  playById,
-  toView,
-  filter
+  playById
 } from '../actions/index'
 
 const styles = theme => ({
@@ -30,11 +24,10 @@ const styles = theme => ({
     paddingLeft: 0
   },
   list: {
-    width: '100%',
-    maxWidth: 1100
+    width: '100%'
   },
   root: {
-    paddingTop: 64,
+    paddingTop: 0,
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
@@ -59,41 +52,13 @@ class AudiosList extends React.Component {
     dispatch(pause());
   }
 
-  toView = () => {
-    const { dispatch } = this.props;
-    dispatch(toView('grid'));
-  }
-
-  filter = (event) => {
-    const { dispatch } = this.props;
-    dispatch(filter(event.target.value));
-  }
-
   render() {
-    const { audios, audioId, playing, filterStr } = this.props;
+    const { audios, audioId, playing } = this.props;
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
         <List className={classes.list}>
-          <ListItem style={{ height: 26 }}>
-            <FormControl>
-              <Input
-                id="weight"
-                placeholder="Filter songs"
-                onChange={this.filter}
-                value={filterStr}
-                endAdornment={<InputAdornment position="end"><SearchIcon color="rgba(0, 0, 0, 0.5)" /></InputAdornment>}
-                margin="normal"
-              />
-            </FormControl>
-            <ListItemSecondaryAction>
-              <IconButton onClick={() => this.toView()}>
-                <GridOn color="rgba(0, 0, 0, 0.8)" />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ ListItem>
-          <Divider />
           {audios.map((audio, i) => (
             <span key={audio.id}>
               <ListItem>
@@ -128,7 +93,6 @@ class AudiosList extends React.Component {
 
 AudiosList.defaultProps = {
   audios: [],
-  filterStr: '',
   playing: false
 };
 

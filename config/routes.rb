@@ -35,6 +35,10 @@ Rails.application.routes.draw do
       resources :audios, only: [:index] do
         get :seed, on: :collection
       end
+
+      resources :users, only: [] do
+        get :current, on: :collection
+      end
     end
   end
 
