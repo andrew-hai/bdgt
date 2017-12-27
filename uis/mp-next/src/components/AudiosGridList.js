@@ -27,6 +27,9 @@ const styles = theme => ({
   },
   textRight: {
     textAlign: 'right'
+  },
+  button: {
+    color: 'white'
   }
 });
 
@@ -34,17 +37,17 @@ class AudiosGridList extends React.Component {
   playById = (index) => {
     const { dispatch } = this.props;
     dispatch(playById(index));
-  }
+  };
 
   play = () => {
     const { dispatch } = this.props;
     dispatch(play());
-  }
+  };
 
   pause = () => {
     const { dispatch } = this.props;
     dispatch(pause());
-  }
+  };
 
   render() {
     const { audios, audioId, playing } = this.props;
@@ -62,18 +65,18 @@ class AudiosGridList extends React.Component {
                 actionIcon={
                   <span>
                     { (audioId === audio.id && !playing) &&
-                      <IconButton onClick={this.play}>
-                        <PlayCircleOutline color="rgba(255, 255, 255, 1)" />
+                      <IconButton onClick={this.play} className={classes.button}>
+                        <PlayCircleOutline />
                       </IconButton>
                     }
                     { (audioId === audio.id && playing) &&
-                      <IconButton onClick={this.pause}>
-                        <PauseCircleOutline color="rgba(255, 255, 255, 1)" />
+                      <IconButton onClick={this.pause} className={classes.button}>
+                        <PauseCircleOutline />
                       </IconButton>
                     }
                     { (audioId !== audio.id) &&
-                      <IconButton onClick={() => this.playById(audio.id)}>
-                        <PlayCircleOutline color="rgba(255, 255, 255, 1)" />
+                      <IconButton onClick={() => this.playById(audio.id)} className={classes.button}>
+                        <PlayCircleOutline />
                       </IconButton>
                     }
                   </span>

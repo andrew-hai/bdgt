@@ -8,20 +8,31 @@ import SearchIcon from 'material-ui-icons/Search';
 import GridOn from 'material-ui-icons/GridOn';
 import ViewList from 'material-ui-icons/ViewList';
 import IconButton from 'material-ui/IconButton';
-import Input, { InputAdornment }from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
+import Input, { InputAdornment, InputLabel } from 'material-ui/Input';
+import { FormControl, FormHelperText } from 'material-ui/Form';
+
+import TopPanelMoreMenu from './TopPanelMoreMenu';
 
 import {
   toView,
   filter
-} from '../actions/index'
+} from '../actions/index';
 
 const styles = theme => ({
   card: {
     marginBottom: 10,
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '5px 5px 5px 16px'
+    padding: '10px 7px 10px 16px'
+  },
+  search: {
+    flex: 1
+  },
+  actions: {
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
   }
 });
 
@@ -29,12 +40,12 @@ class TopPanel extends React.Component {
   toView = (type) => {
     const { dispatch } = this.props;
     dispatch(toView(type));
-  }
+  };
 
   filter = (event) => {
     const { dispatch } = this.props;
     dispatch(filter(event.target.value));
-  }
+  };
 
   render () {
     const { classes, filterStr, view } = this.props;
@@ -42,27 +53,34 @@ class TopPanel extends React.Component {
     return (
       <div>
         <Card className={classes.card}>
-          <FormControl>
+          <FormControl className={classes.search}>
+            <InputLabel htmlFor="filter">Filter songs</InputLabel>
             <Input
-              id="weight"
+              id="filter"
               placeholder="Filter songs"
               onChange={this.filter}
               value={filterStr}
-              endAdornment={<InputAdornment position="end"><SearchIcon color="rgba(0, 0, 0, 0.5)" /></InputAdornment>}
-              margin="normal"
+              endAdornment={
+                <InputAdornment color="action" position="end">
+                  <SearchIcon />
+                </InputAdornment>
+              }
+              margin="dense"
             />
+            <FormHelperText>Enter songs title or artist name</FormHelperText>
           </FormControl>
-          <span>
+          <span className={classes.actions}>
             { view === 'grid' &&
               <IconButton onClick={() => this.toView('list')}>
-                <ViewList color="rgba(0, 0, 0, 0.8)" />
+                <ViewList />
               </IconButton>
             }
             { view === 'list' &&
               <IconButton onClick={() => this.toView('grid')}>
-                <GridOn color="rgba(0, 0, 0, 0.8)" />
+                <GridOn />
               </IconButton>
             }
+            <TopPanelMoreMenu />
           </span>
         </Card>
       </div>

@@ -67,17 +67,17 @@ class AudiosList extends React.Component {
                 <ListItemSecondaryAction>
                   { (audioId === audio.id && !playing) &&
                     <IconButton onClick={this.play}>
-                      <PlayCircleOutline color="rgba(0, 0, 0, 0.8)" />
+                      <PlayCircleOutline />
                     </IconButton>
                   }
                   { (audioId === audio.id && playing) &&
                     <IconButton onClick={this.pause}>
-                      <PauseCircleOutline color="rgba(0, 0, 0, 0.8)" />
+                      <PauseCircleOutline />
                     </IconButton>
                   }
                   { (audioId !== audio.id) &&
                     <IconButton onClick={() => this.playById(audio.id)}>
-                      <PlayCircleOutline color="rgba(0, 0, 0, 0.8)" />
+                      <PlayCircleOutline />
                     </IconButton>
                   }
                 </ListItemSecondaryAction>

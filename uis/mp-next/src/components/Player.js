@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
@@ -25,15 +25,19 @@ import {
   skip,
   toggleShuffle,
   changeVolume
-} from '../actions/index'
+} from '../actions/index';
 
 const styles = theme => ({
-  title: {
+  time: {
     flex: 1,
     textAlign: 'center'
   },
+  title: {
+    flex: 3,
+    textAlign: 'center'
+  },
   playProgressRoot: {
-    flex: 1,
+    flex: 2,
     margin: '0 25px;'
   }
 });
@@ -142,15 +146,15 @@ class Player extends React.Component {
 
           {!shuffle &&
             <IconButton color="contrast" onClick={this.toggleShuffle} aria-label="Shuffle">
-              <ShuffleIcon color="rgba(255, 255, 255, 0.6)"/>
+              <ShuffleIcon />
             </IconButton>
           }
           {shuffle &&
-            <IconButton color="contrast" onClick={this.toggleShuffle} aria-label="Shuffle">
-              <ShuffleIcon color="rgba(255, 255, 255, 1)"/>
+            <IconButton color="accent" onClick={this.toggleShuffle} aria-label="Shuffle">
+              <ShuffleIcon />
             </IconButton>
           }
-          <Typography type="title" color="inherit" className={classes.title}>
+          <Typography type="title" color="inherit" className={classes.time}>
             { this.state.playProgressStr + ' / ' + audio.durationStr }
           </Typography>
           <Typography type="title" color="inherit" className={classes.title}>
