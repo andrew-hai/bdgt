@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { withStyles } from 'material-ui/styles';
-import { GridList, GridListTile, GridListTileBar } from 'material-ui/GridList';
+import GridList, { GridListTile, GridListTileBar } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import PlayCircleOutline from 'material-ui-icons/PlayCircleOutline';
 import PauseCircleOutline from 'material-ui-icons/PauseCircleOutline';
@@ -52,10 +52,11 @@ class AudiosGridList extends React.Component {
   render() {
     const { audios, audioId, playing } = this.props;
     const { classes } = this.props;
+    const cols = (audios.length >= 5) ? 5 : audios.length;
 
     return (
       <div className={classes.container}>
-        <GridList cellHeight={180} className={classes.gridList} cols={5}>
+        <GridList cellHeight={180} className={classes.gridList} cols={cols}>
           {audios.map((audio, i) => (
             <GridListTile key={audio.id}>
               <img src={audio.img} alt={audio.title} />

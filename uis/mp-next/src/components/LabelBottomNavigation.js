@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
+import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import RestoreIcon from 'material-ui-icons/Restore';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 
@@ -27,8 +27,8 @@ class LabelBottomNavigation extends React.Component {
 
     return (
       <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
-        <BottomNavigationButton label="All" value="all" icon={<RestoreIcon />} />
-        <BottomNavigationButton label="Favorites" value="favorites" icon={<FavoriteIcon />} />
+        <BottomNavigationAction label="All" value="all" icon={<RestoreIcon />} />
+        <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
       </BottomNavigation>
     );
   }

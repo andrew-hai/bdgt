@@ -26,13 +26,19 @@ const styles = theme => ({
     padding: '10px 7px 10px 16px'
   },
   search: {
-    flex: 1
+    flex: 2
   },
   actions: {
     flex: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end'
+  },
+  numbers: {
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 
@@ -48,8 +54,7 @@ class TopPanel extends React.Component {
   };
 
   render () {
-    const { classes, filterStr, view } = this.props;
-
+    const { classes, filterStr, audios, allAudios, view } = this.props;
     return (
       <div>
         <Card className={classes.card}>
@@ -69,6 +74,9 @@ class TopPanel extends React.Component {
             />
             <FormHelperText>Enter songs title or artist name</FormHelperText>
           </FormControl>
+          <span className={classes.numbers}>
+            {audios.length} / {allAudios.length}
+          </span>
           <span className={classes.actions}>
             { view === 'grid' &&
               <IconButton onClick={() => this.toView('list')}>
@@ -89,6 +97,8 @@ class TopPanel extends React.Component {
 }
 
 TopPanel.defaultProps = {
+  audios: [],
+  allAudios: [],
   view: 'list',
   filterStr: ''
 };

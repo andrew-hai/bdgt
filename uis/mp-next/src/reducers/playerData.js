@@ -31,17 +31,19 @@ function playerData(state = { playing: false, shuffle: false, audios: [], view: 
 
       return Object.assign({}, state, { playing: false });
     case SKIP:
+      if (!state.audios.length) { return state; }
+
       let skipTo;
-      const currentindex = state.audios.indexOf(state.audios.find(a => a.id === state.audioId));
+      const currentIndex = state.audios.indexOf(state.audios.find(a => a.id === state.audioId));
 
       if (action.direction === 'next') {
         if (state.shuffle) {
           skipTo = Math.round((Math.random() * (state.audios.length - 0) + 0));
         } else {
-          skipTo = currentindex + 1;
+          skipTo = currentIndex + 1;
         }
       } else if (action.direction === 'previous') {
-        skipTo = currentindex - 1;
+        skipTo = currentIndex - 1;
       }
 
       if (skipTo < 0 || skipTo >= (state.audios.length)) { skipTo = 0; }
@@ -75,9 +77,9 @@ function playerData(state = { playing: false, shuffle: false, audios: [], view: 
       let audios;
 
       if (!!action.value) {
+        const term = action.value.toLowerCase();
         audios = state.allAudios.filter(a => {
-          return a.title.toLowerCase().match(action.value.toLowerCase()) ||
-            a.artist.toLowerCase().match(action.value.toLowerCase());
+          return a.title.toLowerCase().match(term) || a.artist.toLowerCase().match(term);
         });
       } else {
         audios = state.allAudios.map(a => a);
