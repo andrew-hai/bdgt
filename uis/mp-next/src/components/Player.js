@@ -106,24 +106,24 @@ class Player extends React.Component {
     return (
       <AppBar position="fixed">
         <Toolbar>
-          <IconButton color="contrast" onClick={this.skipPrevious} aria-label="Skip Previous">
+          <IconButton color="inherit" onClick={this.skipPrevious} aria-label="Skip Previous">
             <SkipPreviousIcon />
           </IconButton>
           {!playing &&
-            <IconButton color="contrast" onClick={this.play} aria-label="Play">
+            <IconButton color="inherit" onClick={this.play} aria-label="Play">
               <PlayArrowIcon />
             </IconButton>
           }
           {playing &&
-            <IconButton color="contrast" onClick={this.pause} aria-label="Pause">
+            <IconButton color="inherit" onClick={this.pause} aria-label="Pause">
               <PauseIcon />
             </IconButton>
           }
-          <IconButton color="contrast" onClick={this.skipNext} aria-label="Skip Next">
+          <IconButton color="inherit" onClick={this.skipNext} aria-label="Skip Next">
             <SkipNextIcon />
           </IconButton>
           <div className={classes.playProgressRoot}>
-            <LinearProgress color="accent" mode="determinate" value={this.state.playProgress} />
+            <LinearProgress color="secondary" variant="determinate" value={this.state.playProgress} />
           </div>
 
           <FormControl>
@@ -145,12 +145,12 @@ class Player extends React.Component {
           </FormControl>
 
           {!shuffle &&
-            <IconButton color="contrast" onClick={this.toggleShuffle} aria-label="Shuffle">
+            <IconButton color="inherit" onClick={this.toggleShuffle} aria-label="Shuffle">
               <ShuffleIcon />
             </IconButton>
           }
           {shuffle &&
-            <IconButton color="accent" onClick={this.toggleShuffle} aria-label="Shuffle">
+            <IconButton color="secondary" onClick={this.toggleShuffle} aria-label="Shuffle">
               <ShuffleIcon />
             </IconButton>
           }

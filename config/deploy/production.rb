@@ -70,6 +70,5 @@ server '46.101.232.51',
     forward_agent: false,
     # auth_methods: %w(publickey password),
     # password: 'please use keys'
-    auth_methods: %w(password),
-    password: '1a2n3d4r111111'
+    auth_methods: %w(publickey)
   }
