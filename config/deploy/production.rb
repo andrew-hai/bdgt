@@ -62,10 +62,10 @@
 set :rails_env, 'production'
 
 server '46.101.232.51',
-  user: 'andrew',
+  user: 'deploy',
   roles: %w{web app db},
   ssh_options: {
-    user: 'andrew', # overrides user setting above
+    user: 'deploy', # overrides user setting above
     # keys: %w(/home/user_name/.ssh/id_rsa),
     forward_agent: false,
     # auth_methods: %w(publickey password),

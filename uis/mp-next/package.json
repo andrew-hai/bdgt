@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "material-ui": "^1.0.0-beta.34",
-    "material-ui-icons": "^1.0.0-beta.17",
+    "material-ui": "^1.0.0-beta.36",
+    "material-ui-icons": "^1.0.0-beta.36",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.7",
